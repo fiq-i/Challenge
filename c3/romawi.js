@@ -6,7 +6,7 @@ function romawi(n){
     for (let i = 0; i< decimal.length; i++){
         for ( ; n >= decimal[i]; ) {
             result += numeral[i];
-            n -= decimal[i]
+            n -= decimal[i];
         }
     }
     return result
