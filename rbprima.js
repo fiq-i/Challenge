@@ -7,8 +7,9 @@ for (var i = 2; i < 30; i++) {
             break
         }
     }       
-    if (isPrima)
-    x.push(i)
+    if (isPrima){
+        x.push(i)
+    }
 }
 console.log(x);
 
