@@ -1,12 +1,10 @@
 function sentencesManipulation(sentence) {
     //write your code here
     var words = sentence.split(" ");
-    console.log(words)
     let output = ""
     for (let i = 0; i < words.length; i++) {
         output += stringManipulation(words[i] + "")
     }
-
     return console.log(output.slice(0, -1))
 }
 
@@ -22,6 +20,6 @@ function stringManipulation(word) {
     let res = word.substr(1, [word.length]);
     res += word[0] + "nyo" + " "
     return res
-}
 
+}
 sentencesManipulation('ibu pergi ke pasar bersama aku')
