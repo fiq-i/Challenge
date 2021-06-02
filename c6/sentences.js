@@ -6,7 +6,8 @@ function sentencesManipulation(sentence) {
     for (let i = 0; i < words.length; i++) {
         output += stringManipulation(words[i] + "")
     }
-    return console.log(output)
+
+    return console.log(output.slice(0, -1))
 }
 
 function stringManipulation(word) {
