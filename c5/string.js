@@ -4,7 +4,7 @@ function stringManipulation(word){
     
     for (let i=0; i<=vowel.length ;i++)
     {
-        if (word[0] == vowel[i])
+        if (word[0].toLowerCase() == vowel[i])
         {
             return console.log(word)
         }
@@ -17,6 +17,5 @@ function stringManipulation(word){
 stringManipulation('ayam');
 stringManipulation('bebek');
 stringManipulation('unta');
+stringManipulation('Elang');
 stringManipulation('macan tutul');
-
-
