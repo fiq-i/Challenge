@@ -3,7 +3,7 @@ function sentencesManipulation(sentence) {
     var words = sentence.split(" ");
     let output = ""
     for (let i = 0; i < words.length; i++) {
-        output += stringManipulation(words[i] + "")
+        output += stringManipulation(words[i])
     }
     return console.log(output.slice(0, -1))
 }
