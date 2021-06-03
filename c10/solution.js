@@ -33,7 +33,6 @@ rl.on('line', (line) => {
         return res
     }
 
-    
     sentencesManipulation(line.trim())
     rl.prompt();
 })
