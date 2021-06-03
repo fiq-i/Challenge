@@ -18,7 +18,7 @@ rl.on('line', (line) => {
         for (let i = 0; i < words.length; i++) {
             output += stringManipulation(words[i])
         }
-        return console.log(output.slice(0, -1))
+        return console.log(`Hasil Konversi :` + (output.slice(0, -1)))
     }
     stringManipulation = (word) => {
         let vowel = ['a', "e", "i", "o", "u"];
