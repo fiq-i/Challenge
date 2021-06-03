@@ -15,32 +15,30 @@ function spiral(param1) {
         let last = (arrA[0].length-1);
         for (let i = 0; i <= last; i++) 
         {
-            result.push(arrA[0][i]) //kanan
+            result.push(arrA[0][i])
         }
         for (let i = 1; i < last; i++) 
         {
-            result.push(arrA[i][last]) //bawah
+            result.push(arrA[i][last]) 
         }
         for (let i = last; i >= 0; i--) 
         {
-            result.push(arrA[last][i]) //kiri
+            result.push(arrA[last][i])
         }
         for (let i = last-1; i > 0; i--) 
         {
-            result.push(arrA[i][0]) //atas
+            result.push(arrA[i][0]) 
         }
-        
         temp = [];
         for (let i = 1; i < last; i++) {
             temp.push(arrA[i].splice(1,last-i))
         }
-        result += [spiral(temp)]
-
+        result.push[spiral(temp)]
     }
-    return (result)
+    return console.log(result)
 }
 
-console.log(spiral(3))
-// spiral(6)
-// spiral(7)
+spiral(4)
+spiral(6)
+spiral(7)
 
