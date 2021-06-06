@@ -15,7 +15,6 @@ fs.readFile('data.json', 'utf8', (err, jsonString) => {
 	console.log('Selamat datang di permainan Tebak Kata, silahkan isi dengan jawaban yang benar ya!\n');
 
 	let counter = 0;
-
 	console.log(`Pertanyaan: ${data[counter].question}`);
 
 	rl.prompt();
