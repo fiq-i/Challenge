@@ -5,9 +5,8 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
         console.log("Error reading file:", err)
     }
     let array1 = JSON.parse(jsonString);
-
-    if (command.includes("filter:")) {
-        let res = command.split(":")
+    let res = command.split(":")
+    if (res[0]=="filter") {
         keywords = [];
         for (let p = 1; p < res.length; p++) {
             keywords.push(res[p])
@@ -22,7 +21,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                 }
 
                 if (element.tag !== undefined) {
-
                     for (let l = 0; l < element.tag.length; l++) {
                         for (let q = 0; q < keywords.length; q++) {
                             if (element.tag[l] == keywords[q]) {
