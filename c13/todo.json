@@ -1,1 +1,25 @@
-[{"status":true,"activity":"sholat maghrib","tag":["reliji"]},{"status":false,"activity":"makan eskrim"},{"status":true,"activity":"minum obat"},{"status":false,"activity":"tidur siang"},{"status":true,"activity":"sholat subuh"}]
+[
+    {
+        "status": true,
+        "activity": "sholat maghrib",
+        "tag": [
+            "reliji"
+        ]
+    },
+    {
+        "status": false,
+        "activity": "makan eskrim"
+    },
+    {
+        "status": true,
+        "activity": "minum obat"
+    },
+    {
+        "status": false,
+        "activity": "tidur siang"
+    },
+    {
+        "status": true,
+        "activity": "sholat subuh"
+    }
+]

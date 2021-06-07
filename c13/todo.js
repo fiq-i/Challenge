@@ -15,7 +15,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             array1.forEach(element => {
                 {
                     let tick = " "
-
                     if (element.status == true) {
                         tick = "x"
                     }
@@ -46,7 +45,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                     if (err) {
                         return console.log(err);
                     }
-
                 })
             }
             console.log(`${newTask} telah ditambahkan.`)
@@ -94,7 +92,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
         case `uncomplete`:
             let uncompletedId = process.argv[3] - 1;
             array1[uncompletedId].status = false
-            console.log(`${array1[uncompletedId].activity} status selsai dibatalkan`)
+            console.log(`${array1[uncompletedId].activity} status selesai dibatalkan`)
             arrayString = JSON.stringify(array1)
             fs.writeFileSync('todo.json', arrayString, function (err) {
                 if (err) {
@@ -160,7 +158,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                 }
             })
             break;
-
         
         default:
             console.log(`>>> JS TODO <<<
