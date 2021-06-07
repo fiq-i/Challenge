@@ -5,42 +5,51 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
         console.log("Error reading file:", err)
     }
     let array1 = JSON.parse(jsonString);
-    let res = command.split(":")
-    if (res[0]=="filter") {
-        keywords = [];
-        for (let p = 1; p < res.length; p++) {
-            keywords.push(res[p])
-        }
-        let r = 1
-        console.log(`Daftar Pekerjaan \n`)
-        array1.forEach(element => {
-            {
-                let tick = " "
-                if (element.status == true) {
-                    tick = "x"
-                }
+    if (process.argv.length > 2) {
+        let res = command.split(":")
+        if (res[0] == "filter") {
+            keywords = [];
+            for (let p = 1; p < res.length; p++) {
+                keywords.push(res[p])
+            }
+            let r = 1
+            console.log(`Daftar Pekerjaan \n`)
+            array1.forEach(element => {
+                {
+                    let tick = " "
+                    if (element.status == true) {
+                        tick = "x"
+                    }
+                    if (element.tag !== undefined) {
+                        for (let l = 0; l < element.tag.length; l++) {
+                            for (let q = 0; q < keywords.length; q++) {
+                                if (element.tag[l] == keywords[q]) {
+                                    {
+                                        console.log(`${r}. [${tick}] ${element.activity}`)
+                                    }
 
-                if (element.tag !== undefined) {
-                    for (let l = 0; l < element.tag.length; l++) {
-                        for (let q = 0; q < keywords.length; q++) {
-                            if (element.tag[l] == keywords[q]) {
-                                {
-                                    console.log(`${r}. [${tick}] ${element.activity}`)
                                 }
-
                             }
                         }
-                    }
-                } r++
-            }
-        })
+                    } r++
+                }
+            })
+        }
     }
-    else
         switch (command) {
             case "add":
-                let newTask = process.argv[3].toString();
+                let newTask = "";
+                for (let u=3; u < process.argv.length ;u++){
+                    {
+                        if(u > 3){
+                            newTask += " " + process.argv[u]
+                        } else 
+                        newTask += process.argv[u]
+                    }
+                }
+                
                 {
-                    obj = { "number": array1.length + 1, "status": false, "activity": newTask }
+                    let obj = { "status": false, "activity": newTask }
                     array1.push(obj)
                     arrayString = JSON.stringify(array1)
                     fs.writeFileSync('todo.json', arrayString, function (err) {
@@ -143,16 +152,35 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                 break;
 
             case "tag":
+                let id = process.argv[3];
                 let tags = [];
                 for (let o = 4; o < process.argv.length; o++) {
                     tags.push(process.argv[o])
-                }
+                } 
+                
                 for (let n = 0; n < array1.length; n++) {
-                    if (process.argv[3] - 1 == n) {
+                    if (process.argv[3] - 1 == n && array1[n].length > 2) {
                         array1[n]["tag"] = tags
                         console.log(`${tags.toString()} berhasil ditambahkan ke daftar '${array1[n].activity}'`)
                     }
+                    else      {
+                        if (process.argv[3] - 1 == n) {
+                            // for (let v =0; v<tags.length ;v++){
+                            //     console.log(tags[v])
+                            // }
+                            for (let w=0; w<tags.length; w++){
+                                array1[n].tag.push(tags[w])
+                            }
+                            // console.log(array1[n].tag)
+                            console.log(`${tags.toString()} berhasil ditambahkan ke daftar '${array1[n].activity}'`)
+                        
+                        }
+                    }
+                   
+                        
                 }
+               
+
                 arrayString = JSON.stringify(array1)
                 fs.writeFileSync('todo.json', arrayString, function (err) {
                     if (err) {
@@ -161,7 +189,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                 })
                 break;
 
-            default:
+                case undefined :
                 console.log(`>>> JS TODO <<<
             $ node todo.js <command>
             $ node todo.js list
@@ -174,5 +202,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             $ node todo.js tag <task_id> <tag_name_1> <tag_name_2> ... <tag_name_N>
             $ node todo.js filter:<tag_name>`
                 )
-        }
+            }
+    
 })
