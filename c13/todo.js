@@ -13,6 +13,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             keywords.push(res[p])
         }
         let r = 1
+        console.log(`Daftar Pekerjaan \n`)
         array1.forEach(element => {
             {
                 let tick = " "
@@ -26,7 +27,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                         for (let q = 0; q < keywords.length; q++) {
                             if (element.tag[l] == keywords[q]) {
                                 {
-                                    console.log(`Daftar Pekerjaan \n${r}. [${tick}] ${element.activity}`)
+                                    console.log(`${r}. [${tick}] ${element.activity}`)
                                 }
 
                             }
