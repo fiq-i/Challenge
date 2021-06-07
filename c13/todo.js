@@ -165,13 +165,10 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                     }
                     else      {
                         if (process.argv[3] - 1 == n) {
-                            // for (let v =0; v<tags.length ;v++){
-                            //     console.log(tags[v])
-                            // }
+                       
                             for (let w=0; w<tags.length; w++){
                                 array1[n].tag.push(tags[w])
                             }
-                            // console.log(array1[n].tag)
                             console.log(`${tags.toString()} berhasil ditambahkan ke daftar '${array1[n].activity}'`)
                         
                         }
