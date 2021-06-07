@@ -9,37 +9,37 @@ fs.readFile(read, 'utf8', (err, jsonString) => {
     if (err) {
         console.log("Error reading file:", err)
     }
-    let obj = JSON.parse(jsonString);
-    let i = 0;
+    let array = JSON.parse(jsonString);
+    let current = 0;
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
         prompt: 'Jawaban :'
     });
     console.log(`Selamat datang di permainan Tebak-tebakan. kamu akan diberikan pertanyaan dari file ini ${read}.\nUntuk bermain, jawablah dengan jawaban yang sesuai.\nGunakan 'skip' untuk menangguhkan pertanyaannya, dan di akhir pertanyaan akan ditanyakan lagi.\n`);
-    let count = 0;
-    console.log(obj[count].question)
+    let counter = 0;
+    console.log(array[counter].question)
     rl.prompt();
 
     rl.on('line', (guess) => {
         if (guess.trim().toLowerCase() == 'skip') {
-            obj.push(obj[i]);
-            i++;
-            console.log("\nPertanyaan: " + obj[i].question);
+            array.push(array[current]);
+            current++;
+            console.log("\nPertanyaan: " + array[current].question);
         } else {
-            if (guess.toLowerCase() == obj[i].answer.toLowerCase()) {
+            if (guess.toLowerCase() == array[current].answer.toLowerCase()) {
                 console.log('Anda beruntung!\n')
-                count = 0;
-                i++;
-                if (i == obj.length) {
+                counter = 0;
+                current++;
+                if (current == array.length) {
                     console.log('Anda Berhasil!')
                     rl.close();
                 } else {
-                    console.log(obj[i].question)
+                    console.log(array[current].question)
                 }
             } else {
-                count++;
-                console.log(`\nAnda kurang beruntung. Anda telah salah ${count} kali, silahkan coba lagi.`)
+                counter++;
+                console.log(`\nAnda kurang beruntung. Anda telah salah ${counter} kali, silahkan coba lagi.`)
             }
         }
         rl.prompt();
