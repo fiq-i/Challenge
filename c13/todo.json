@@ -8,7 +8,10 @@
     },
     {
         "status": false,
-        "activity": "makan eskrim"
+        "activity": "makan eskrim",
+        "tag": [
+            "kuliner"
+        ]
     },
     {
         "status": true,

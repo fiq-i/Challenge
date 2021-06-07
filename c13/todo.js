@@ -12,24 +12,30 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
         for (let p = 1; p<res.length ;p++){
             keywords.push(res[p])
         }
+            let r = 1
             array1.forEach(element => {
                 {
                     let tick = " "
                     if (element.status == true) {
                         tick = "x"
                     }
+                    
                     if (element.tag !== undefined) {
+                        
                         for (let l = 0; l < element.tag.length; l++) {
                             for (let q = 0; q<keywords.length; q++)
                             {
                                 if (element.tag[l] == keywords[q]) {
                                     {
-                                        console.log(`Daftar Pekerjaan \n${l + 1}. [${tick}] ${element.activity}`)
+                                        console.log(`Daftar Pekerjaan \n${r}. [${tick}] ${element.activity}`)
                                     }
+                                    
                             }
+                            
                             }
+                            
                         }
-                    }
+                    } r++
                 }
             })
     }
