@@ -1,12 +1,40 @@
 let command = process.argv[2]
 const fs = require("fs");
-const readline = require('readline');
 fs.readFile('todo.json', 'utf8', (err, jsonString) => {
     if (err) {
         console.log("Error reading file:", err)
     }
     let array1 = JSON.parse(jsonString);
 
+    if(command.includes("filter:")){
+        let res = command.split(":")
+        keywords = [];
+        for (let p = 1; p<res.length ;p++){
+            keywords.push(res[p])
+        }
+            array1.forEach(element => {
+                {
+                    let tick = " "
+
+                    if (element.status == true) {
+                        tick = "x"
+                    }
+                    if (element.tag !== undefined) {
+                        for (let l = 0; l < element.tag.length; l++) {
+                            for (let q = 0; q<keywords.length; q++)
+                            {
+                                if (element.tag[l] == keywords[q]) {
+                                    {
+                                        console.log(`Daftar Pekerjaan \n${l + 1}. [${tick}] ${element.activity}`)
+                                    }
+                            }
+                            }
+                        }
+                    }
+                }
+            })
+    }
+    else
     switch (command) {
         case "add":
             let newTask = process.argv[3].toString();
@@ -21,11 +49,12 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
 
                 })
             }
-            console.log(array1)
+            console.log(`${newTask} telah ditambahkan.`)
             break;
 
         case "list":
             let i = 1;
+            console.log(`Daftar Pekerjaan`)
             array1.forEach(element => {
                 let tick = " "
                 if (element.status == true) {
@@ -38,10 +67,10 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             break;
 
         case "delete":
-            let deletedId = process.argv[3];
-
+            let deletedId = process.argv[3] - 1;
+            let task = array1[deletedId].activity
             array1.splice(deletedId, 1)
-            console.log(array1)
+            console.log(`${task} telah dihapus dari daftar`)
             arrayString = JSON.stringify(array1)
             fs.writeFileSync('todo.json', arrayString, function (err) {
                 if (err) {
@@ -51,9 +80,9 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             break;
 
         case `complete`:
-            let completedId = process.argv[3];
+            let completedId = process.argv[3] - 1;
             array1[completedId].status = true
-            console.log(array1)
+            console.log(`${array1[completedId].activity} telah selesai`)
             arrayString = JSON.stringify(array1)
             fs.writeFileSync('todo.json', arrayString, function (err) {
                 if (err) {
@@ -63,9 +92,9 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             break;
 
         case `uncomplete`:
-            let uncompletedId = process.argv[3];
+            let uncompletedId = process.argv[3] - 1;
             array1[uncompletedId].status = false
-            console.log(array1)
+            console.log(`${array1[uncompletedId].activity} status selsai dibatalkan`)
             arrayString = JSON.stringify(array1)
             fs.writeFileSync('todo.json', arrayString, function (err) {
                 if (err) {
@@ -118,14 +147,12 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             for (let o = 4; o < process.argv.length; o++) {
                 tags.push(process.argv[o])
             }
-            // console.log(tags)
             for (let n = 0; n < array1.length; n++) {
-                if (process.argv[3] == n) {
+                if (process.argv[3] - 1 == n) {
                     array1[n]["tag"] = tags
+                    console.log(`${tags.toString()} berhasil ditambahkan ke daftar '${array1[n].activity}'`)
                 }
-
             }
-            console.log(array1)
             arrayString = JSON.stringify(array1)
             fs.writeFileSync('todo.json', arrayString, function (err) {
                 if (err) {
@@ -134,28 +161,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             })
             break;
 
-        case "filter:":
-            let keyword = process.argv[3];
-            array1.forEach(element => {
-                {
-                    let tick = " "
-
-                    if (element.status == true) {
-                        tick = "x"
-                    }
-                    if (element.tag !== undefined) {
-                        for (let l = 0; l < element.tag.length; l++) {
-                            if (element.tag[l] == keyword) {
-                                {
-                                    console.log(`${l + 1}. [${tick}] ${element.activity}`)
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-            break;
-
+        
         default:
             console.log(`>>> JS TODO <<<
             $ node todo.js <command>
