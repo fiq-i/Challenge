@@ -1,8 +1,7 @@
 const fs = require("fs");
 const readline = require('readline');
-
 let read = process.argv[2];
-if(read == undefined){
+if (read == undefined) {
     console.log(`Tolong sertakan nama file dengan inputan soalnya.\nMisalnya 'node solution.js data.json'`);
     process.exit(0);
 }
