@@ -57,3 +57,24 @@ INSERT INTO kelas (jadwal, hari, ruangan, kode_matkul)
 VALUES ("12:50", 'senin', 'AA1', 'tes123'),
        ("19:30", 'selasa', 'B12', 'tes123'),
        ("08:30", 'rabu', 'C30', 'oop555');
+
+CREATE TABLE nilai(
+    nim_siswa varchar NOT NULL,
+    kode_matkul varchar(10) NOT NULL,
+    nilai_matkul varchar(2) NOT NULL,
+    FOREIGN KEY (nim_siswa)
+        REFERENCES mahasiswa (nim)
+    FOREIGN KEY (kode_matkul)
+        REFERENCES mata_kuliah (kode_matkul)
+    PRIMARY KEY (nim_siswa, kode_matkul)
+);
+
+INSERT INTO nilai (nim_siswa, kode_matkul, nilai_matkul)
+VALUES (1, 'tes123', 'B'),
+       (1, 'oop555', 'C'),
+       (2, 'tes123', 'D'),
+       (2, 'oop555', 'A'),
+       (3, 'tes123', 'A'),
+       (3, 'oop555', 'B');
+
+SELECT nilai_matkul FROM nilai;
