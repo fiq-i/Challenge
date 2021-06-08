@@ -77,4 +77,4 @@ VALUES (1, 'tes123', 'B'),
        (3, 'tes123', 'A'),
        (3, 'oop555', 'B');
 
-SELECT nilai_matkul FROM nilai WHERE nim_siswa =1;
+SELECT kode_matkul, nilai_matkul FROM nilai WHERE nim_siswa =1;
