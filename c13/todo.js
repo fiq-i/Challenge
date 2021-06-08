@@ -156,25 +156,24 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                 for (let o = 4; o < process.argv.length; o++) {
                     tags.push(process.argv[o])
                 } 
-                
+
+                console.log(array1[id-1].tag.length)
                 if (array1[id-1].tag.length == 0){
-                    
                             array1[id-1].tag = tags
-                            console.log(`${tags} berhasil ditambahkan`)
-                    
+                            console.log(`${tags} berhasil ditambahkan`)      
                 }
                 else {
-
-                    console.log ('xxx')
+                    // console.log ('xxx')
                     for(let p = 0; p<tags.length ;p++){
                         for(let q = 0; q<array1[id-1].tag.length; q++){
     
                             if(tags[p] == array1[id-1].tag[q]){
-                                break;
+                                q = array1[id-1].tag.length
                             }
-                            if(q == array1[id-1].tag.length - 1){
-                                array1[id-1].tag.push(tags[q])
-                                console.log(`${tags[q]} berhasil ditambahkan`)
+                            if(q == array1[id-1].tag.length-1){
+                                array1[id-1].tag.push(tags[p-1])
+                                console.log(`${tags[p]} berhasil ditambahkan`)
+                                q = array1[id-1].tag.length
                             }
                         }
                     }
