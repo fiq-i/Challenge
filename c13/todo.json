@@ -1,1 +1,49 @@
-[{"status":false,"activity":"makan eskrim","tag":["kuliner","gemuk","ijo","bau","bau"]},{"status":true,"activity":"minum obat"},{"status":false,"activity":"tidur siang"},{"status":true,"activity":"sholat subuh"}]
+[
+    {
+        "status": false,
+        "activity": "makan eskrim",
+        "tag": [
+            "kuliner",
+            "mamam"
+        ]
+    },
+    {
+        "status": true,
+        "activity": "minum obat",
+        "tag": [
+            "reliji"
+        ]
+    },
+    {
+        "status": false,
+        "activity": "sholat subuh",
+        "tag": []
+    },
+    {
+        "status": true,
+        "activity": "makan malam",
+        "tag": [
+            "ayam",
+            "ciken",
+            "nugget"
+        ]
+    },
+    {
+        "status": false,
+        "activity": "tidur siang",
+        "tag": [
+            "bau",
+            "ooo",
+            "iii",
+            "aaa"
+        ]
+    },
+    {
+        "status": false,
+        "activity": "makan donat",
+        "tag": [
+            "aaa",
+            "iii"
+        ]
+    }
+]

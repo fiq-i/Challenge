@@ -49,7 +49,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                 }
                 
                 {
-                    let obj = { "status": false, "activity": newTask }
+                    let obj = { "status": false, "activity": newTask, "tag": []}
                     array1.push(obj)
                     arrayString = JSON.stringify(array1)
                     fs.writeFileSync('todo.json', arrayString, function (err) {
@@ -115,16 +115,15 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             case "list:outstanding":
                 let j = 1
                 let space = " "
-                if (process.argv[3] == "asc") {
-                    for (j; j < array1.length; j++) {
-                        if (array1[j].status == false) {
-                            console.log(`${j + 1}. [${space}] ${array1[j].activity}`)
-                        }
-                    }
-                } else
-
                     if (process.argv[3] == "desc") {
                         for (j = array1.length - 1; j >= 0; j--) {
+                            if (array1[j].status == false) {
+                                console.log(`${j + 1}. [${space}] ${array1[j].activity}`)
+                            }
+                        }
+                    } else
+                    {
+                        for (j = 0; j < array1.length; j++) {
                             if (array1[j].status == false) {
                                 console.log(`${j + 1}. [${space}] ${array1[j].activity}`)
                             }
@@ -135,13 +134,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             case "list:completed":
                 let k = 0
                 let symbol = "x"
-                if (process.argv[3] == "asc") {
-                    for (k; k < array1.length; k++) {
-                        if (array1[k].status == true) {
-                            console.log(`${k + 1}. [${symbol}] ${array1[k].activity}`)
-                        }
-                    }
-                } else
                     if (process.argv[3] == "desc") {
                         for (k = array1.length - 1; k >= 0; k--) {
                             if (array1[k].status == true) {
@@ -149,6 +141,13 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                             }
                         }
                     }
+                else{
+                        for (k; k < array1.length; k++) {
+                            if (array1[k].status == true) {
+                                console.log(`${k + 1}. [${symbol}] ${array1[k].activity}`)
+                            }
+                        }
+                    } 
                 break;
 
             case "tag":
@@ -158,24 +157,31 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                     tags.push(process.argv[o])
                 } 
                 
-                for (let n = 0; n < array1.length; n++) {
-                    if (process.argv[3] - 1 == n && array1[n].length > 2) {
-                        array1[n]["tag"] = tags
-                        console.log(`${tags.toString()} berhasil ditambahkan ke daftar '${array1[n].activity}'`)
-                    }
-                    else      {
-                        if (process.argv[3] - 1 == n) {
-                       
-                            for (let w=0; w<tags.length; w++){
-                                array1[n].tag.push(tags[w])
+                if (array1[id-1].tag.length == 0){
+                    
+                            array1[id-1].tag = tags
+                            console.log(`${tags} berhasil ditambahkan`)
+                    
+                }
+                else {
+
+                    console.log ('xxx')
+                    for(let p = 0; p<tags.length ;p++){
+                        for(let q = 0; q<array1[id-1].tag.length; q++){
+    
+                            if(tags[p] == array1[id-1].tag[q]){
+                                break;
                             }
-                            console.log(`${tags.toString()} berhasil ditambahkan ke daftar '${array1[n].activity}'`)
-                        
+                            if(q == array1[id-1].tag.length - 1){
+                                array1[id-1].tag.push(tags[q])
+                                console.log(`${tags[q]} berhasil ditambahkan`)
+                            }
                         }
                     }
-                   
-                        
                 }
+                
+
+                
                
 
                 arrayString = JSON.stringify(array1)
