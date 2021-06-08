@@ -1,21 +1,44 @@
 [
     {
         "status": false,
-        "activity": "makan eskrim",
+        "activity": "push up 50",
         "tag": [
-            "kuliner"
+            "latihan",
+            "olahraga",
+            "capek"
         ]
     },
     {
         "status": true,
-        "activity": "minum obat",
+        "activity": "tidur secukupnya",
         "tag": [
-            "reliji"
+            "makan",
+            "olahraga",
+            "sport",
+            "xxx",
+            "yyy"
         ]
     },
     {
         "status": false,
-        "activity": "sholat subuh",
+        "activity": "sit up 10",
+        "tag": [
+            "makan",
+            "olahraga",
+            "capek"
+        ]
+    },
+    {
+        "status": true,
+        "activity": "pull up 5",
         "tag": []
+    },
+    {
+        "status": false,
+        "activity": "makan bakmi",
+        "tag": [
+            "kuliner",
+            "jalan-jalan"
+        ]
     }
 ]

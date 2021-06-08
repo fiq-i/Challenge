@@ -160,14 +160,14 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                             console.log(`${tags} berhasil ditambahkan`)      
                 }
                 else {
-                    for(let p = 0; p<tags.length ;p++){
+                    for(let p = 0; p<tags.length ; p++){
                         for(let q = 0; q<array1[id-1].tag.length; q++){
     
                             if(tags[p] == array1[id-1].tag[q]){
                                 q = array1[id-1].tag.length
                             }
                             if(q == array1[id-1].tag.length-1){
-                                array1[id-1].tag.push(tags[p-1])
+                                array1[id-1].tag.push(tags[p])
                                 console.log(`${tags[p]} berhasil ditambahkan`)
                                 q = array1[id-1].tag.length
                             }
@@ -192,7 +192,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
             $ node todo.js delete <task_id>
             $ node todo.js complete <task_id>
             $ node todo.js list:outstanding asc|desc
-            $ node todo.js list completed asc |desc
+            $ node todo.js list completed asc|desc
             $ node todo.js tag <task_id> <tag_name_1> <tag_name_2> ... <tag_name_N>
             $ node todo.js filter:<tag_name>`
                 )
