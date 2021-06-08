@@ -54,6 +54,6 @@ CREATE TABLE kelas(
 );
 
 INSERT INTO kelas (jadwal, hari, ruangan, kode_matkul)
-VALUES ("02:34:56.049", 'senin', 'AA1', 'tes123'),
-       ("12:34:56.034", 'selasa', 'B12', 'tes123'),
-       ("02:50:00.0340", 'rabu', 'C30', 'oop555');
+VALUES ("12:50", 'senin', 'AA1', 'tes123'),
+       ("19:30", 'selasa', 'B12', 'tes123'),
+       ("08:30", 'rabu', 'C30', 'oop555');
