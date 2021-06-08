@@ -27,7 +27,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                                     {
                                         console.log(`${r}. [${tick}] ${element.activity}`)
                                     }
-
                                 }
                             }
                         }
@@ -157,7 +156,7 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                     tags.push(process.argv[o])
                 } 
 
-                console.log(array1[id-1].tag.length)
+                // console.log(array1[id-1].tag.length)
                 if (array1[id-1].tag.length == 0){
                             array1[id-1].tag = tags
                             console.log(`${tags} berhasil ditambahkan`)      
@@ -179,10 +178,6 @@ fs.readFile('todo.json', 'utf8', (err, jsonString) => {
                     }
                 }
                 
-
-                
-               
-
                 arrayString = JSON.stringify(array1)
                 fs.writeFileSync('todo.json', arrayString, function (err) {
                     if (err) {
