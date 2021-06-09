@@ -91,7 +91,7 @@ VALUES (1, 'tes123', 'B'),
 2. SELECT * FROM mahasiswa WHERE umur < 20;
 3. SELECT * FROM mahasiswa, nilai WHERE mahasiswa.nim = nilai.nim_siswa AND  nilai.nilai_matkul <= 'B';
 4. SELECT * FROM mahasiswa WHERE mahasiswa.totalsks > 10;
-5. SELECT * FROM mata_kuliah, nilai, mahasiswa WHERE mata_kuliah.nama = 'data mining' AND mata_kuliah.kode_matkul = nilai.kode_matkul AND nilai.nim_siswa = mahasiswa.nim;
+5. SELECT mahasiswa.*, mata_kuliah.nama FROM mata_kuliah, nilai, mahasiswa WHERE mata_kuliah.nama = 'data mining' AND mata_kuliah.kode_matkul = nilai.kode_matkul AND nilai.nim_siswa = mahasiswa.nim;
 6. SELECT dosen.nama, kelas.jumlah_mhs FROM dosen, mata_kuliah, kelas WHERE dosen.nip = mata_kuliah.kode_pengajar AND mata_kuliah.kode_matkul == kelas.kode_matkul;
 7. SELECT nama, umur FROM mahasiswa ORDER BY umur DESC;
 8. (SOLUSI WHERE) SELECT mahasiswa.*, mata_kuliah.nama, nilai.nilai_matkul, dosen.* FROM mahasiswa, nilai, mata_kuliah, dosen WHERE mahasiswa.nim = nilai.nim_siswa AND nilai.kode_matkul = mata_kuliah.kode_matkul AND mata_kuliah.kode_pengajar = dosen.nip
