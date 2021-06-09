@@ -73,9 +73,7 @@ VALUES (1, 'tes123', 'B'),
 1. SELECT *
 FROM mahasiswa;
 
-2. SELECT *
-FROM mahasiswa
-WHERE umur < 20;
+2. 
 SELECT (strftime('%Y', 'now') - strftime('%Y', ttl)) - (
         strftime('%m-%d', 'now') < strftime('%m-%d', ttl)
     ) AS umur,
