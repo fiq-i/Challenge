@@ -87,6 +87,8 @@ VALUES (1, 'tes123', 'B'),
        (4, 'tes123', 'E'),
        (4, 'oop555', 'A');
 
+JAWABAN
+
 1. SELECT * FROM mahasiswa;
 2. SELECT * FROM mahasiswa WHERE umur < 20;
 3. SELECT * FROM mahasiswa, nilai WHERE mahasiswa.nim = nilai.nim_siswa AND  nilai.nilai_matkul <= 'B';
