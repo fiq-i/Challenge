@@ -93,6 +93,9 @@ VALUES (1, 'tes123', 'B'),
 4. SELECT * FROM mahasiswa WHERE mahasiswa.totalsks > 10;
 5. SELECT mahasiswa.*, mata_kuliah.nama FROM mata_kuliah, nilai, mahasiswa WHERE mata_kuliah.nama = 'data mining' AND mata_kuliah.kode_matkul = nilai.kode_matkul AND nilai.nim_siswa = mahasiswa.nim;
 6. SELECT dosen.nama, kelas.jumlah_mhs FROM dosen, mata_kuliah, kelas WHERE dosen.nip = mata_kuliah.kode_pengajar AND mata_kuliah.kode_matkul == kelas.kode_matkul;
+   SELECT dosen.nama, SUM(kelas.jumlah_mhs) AS jumlahmahasiswa FROM dosen, mata_kuliah, kelas WHERE dosen.nip = mata_kuliah.kode_pengajar AND mata_kuliah.kode_matkul = kelas.kode_matkul AND dosen.nama = 'Aldy';
+   SELECT dosen.nama, SUM(kelas.jumlah_mhs) AS jumlahmahasiswa FROM dosen, mata_kuliah, kelas WHERE dosen.nip = mata_kuliah.kode_pengajar AND mata_kuliah.kode_matkul = kelas.kode_matkul AND dosen.nama = 'Sofyan';
+   SELECT dosen.nama, SUM(kelas.jumlah_mhs) AS jumlahmahasiswa FROM dosen, mata_kuliah, kelas WHERE dosen.nip = mata_kuliah.kode_pengajar AND mata_kuliah.kode_matkul = kelas.kode_matkul AND dosen.nama = 'Rifqi';
 7. SELECT nama, umur FROM mahasiswa ORDER BY umur DESC;
 8. (SOLUSI WHERE) SELECT jurusan.*, mahasiswa.*, mata_kuliah.nama, nilai.nilai_matkul, dosen.* FROM jurusan, mahasiswa, nilai, mata_kuliah, dosen WHERE jurusan.nama = mahasiswa.jurusan AND mahasiswa.nim = nilai.nim_siswa AND nilai.kode_matkul = mata_kuliah.kode_matkul AND mata_kuliah.kode_pengajar = dosen.nip AND nilai.nilai_matkul >= 'D';
    (SOLUSI JOIN) SELECT jurusan.*, mahasiswa.*, mata_kuliah.nama, nilai.nilai_matkul, dosen.* FROM jurusan JOIN mahasiswa ON jurusan.nama = mahasiswa.jurusan JOIN nilai ON mahasiswa.nim = nilai.nim_siswa JOIN mata_kuliah ON nilai.kode_matkul = mata_kuliah.kode_matkul JOIN dosen ON mata_kuliah.kode_pengajar = dosen.nip WHERE nilai.nilai_matkul >= 'D';
