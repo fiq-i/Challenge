@@ -1,7 +1,7 @@
 function sentencesManipulation(sentence) {
     //write your code here
     var words = sentence.split(" ");
-    let output = ""
+    let output = "";
     for (let i = 0; i < words.length; i++) {
         output += stringManipulation(words[i])
     }
