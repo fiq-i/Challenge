@@ -76,6 +76,13 @@ FROM mahasiswa;
 2. SELECT *
 FROM mahasiswa
 WHERE umur < 20;
+SELECT (strftime('%Y', 'now') - strftime('%Y', ttl)) - (
+        strftime('%m-%d', 'now') < strftime('%m-%d', ttl)
+    ) AS umur,
+    nama
+FROM mahasiswa
+WHERE umur < 20
+ORDER BY umur;
 
 3. SELECT *
 FROM mahasiswa,
