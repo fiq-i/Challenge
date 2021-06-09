@@ -11,15 +11,14 @@ CREATE TABLE mahasiswa(
     nama varchar (40) NOT NULL,
     alamat text NOT NULL,
     jurusan varchar NOT NULL,
-    umur INTEGER NOT NULL,
-    totalsks INTEGER NOT NULL,
+    ttl date NOT NULL,
     FOREIGN KEY (jurusan) REFERENCES jurusan(nama)
 );
-INSERT INTO mahasiswa (nama, alamat, jurusan, umur, totalsks)
-VALUES ('Fiqi', 'Cirebon', 'Kuliner', 20, 22),
-    ('Bambang', 'Bengkulu', 'Programming', 18, 25),
-    ('Fajar', 'Bandung', 'Desain', 17, 10),
-    ('Alex', 'Bandung', 'Programming', 19, 10);
+INSERT INTO mahasiswa (nama, alamat, jurusan, ttl)
+VALUES ('Fiqi', 'Cirebon', 'Kuliner', '2001-01-01'),
+    ('Bambang', 'Bengkulu','Programming','2000-02-02'),
+    ('Fajar', 'Bandung', 'Desain', '2003-03-03'),
+    ('Alex', 'Bandung', 'Programming', '2004-04-04');
 CREATE TABLE dosen(
     nip varchar(20) PRIMARY KEY NOT NULL,
     nama varchar (40) NOT NULL
@@ -71,24 +70,30 @@ VALUES (1, 'tes123', 'B'),
     (4, 'tes123', 'E'),
     (4, 'oop555', 'A');
 
-SELECT *
+1. SELECT *
 FROM mahasiswa;
 
-SELECT *
+2. SELECT *
 FROM mahasiswa
 WHERE umur < 20;
 
-SELECT *
+3. SELECT *
 FROM mahasiswa,
     nilai
 WHERE mahasiswa.nim = nilai.nim_siswa
     AND nilai.nilai_matkul <= 'B';
 
-SELECT *
-FROM mahasiswa
-WHERE mahasiswa.totalsks > 10;
+4. SELECT SUM(mata_kuliah.sks), mahasiswa.nama AS totalsks
+FROM mahasiswa,
+    nilai,
+    mata_kuliah
+WHERE mahasiswa.nim = nilai.nim_siswa
+    AND nilai.kode_matkul = mata_kuliah.kode_matkul
+    GROUP BY nim
+    HAVING SUM(mata_kuliah.sks) > 10;
 
-SELECT mahasiswa.*,
+
+5. SELECT mahasiswa.*,
     mata_kuliah.nama
 FROM mata_kuliah,
     nilai,
@@ -97,47 +102,23 @@ WHERE mata_kuliah.nama = 'data mining'
     AND mata_kuliah.kode_matkul = nilai.kode_matkul
     AND nilai.nim_siswa = mahasiswa.nim;
 
-SELECT dosen.nama,
-    kelas.jumlah_mhs
+6. SELECT dosen.nama,
+    SUM(kelas.jumlah_mhs)
 FROM dosen,
     mata_kuliah,
     kelas
 WHERE dosen.nip = mata_kuliah.kode_pengajar
-    AND mata_kuliah.kode_matkul == kelas.kode_matkul;
+    AND mata_kuliah.kode_matkul == kelas.kode_matkul
+GROUP BY dosen.nama;
 
-SELECT dosen.nama,
-    SUM(kelas.jumlah_mhs) AS jumlahmahasiswa
-FROM dosen,
-    mata_kuliah,
-    kelas
-WHERE dosen.nip = mata_kuliah.kode_pengajar
-    AND mata_kuliah.kode_matkul = kelas.kode_matkul
-    AND dosen.nama = 'Aldy';
-
-SELECT dosen.nama,
-    SUM(kelas.jumlah_mhs) AS jumlahmahasiswa
-FROM dosen,
-    mata_kuliah,
-    kelas
-WHERE dosen.nip = mata_kuliah.kode_pengajar
-    AND mata_kuliah.kode_matkul = kelas.kode_matkul
-    AND dosen.nama = 'Sofyan';
-
-SELECT dosen.nama,
-    SUM(kelas.jumlah_mhs) AS jumlahmahasiswa
-FROM dosen,
-    mata_kuliah,
-    kelas
-WHERE dosen.nip = mata_kuliah.kode_pengajar
-    AND mata_kuliah.kode_matkul = kelas.kode_matkul
-    AND dosen.nama = 'Rifqi';
-
-SELECT nama,
-    umur
+7. SELECT (strftime('%Y', 'now') - strftime('%Y', ttl)) - (
+        strftime('%m-%d', 'now') < strftime('%m-%d', ttl)
+    ) AS umur,
+    nama
 FROM mahasiswa
-ORDER BY umur DESC;
+GROUP BY umur;
 
-SELECT jurusan.*,
+8. SELECT jurusan.*,
     mahasiswa.*,
     mata_kuliah.nama,
     nilai.nilai_matkul,
@@ -152,7 +133,7 @@ WHERE jurusan.nama = mahasiswa.jurusan
     AND nilai.kode_matkul = mata_kuliah.kode_matkul
     AND mata_kuliah.kode_pengajar = dosen.nip
     AND nilai.nilai_matkul >= 'D';
-
+    
 SELECT jurusan.*,
     mahasiswa.*,
     mata_kuliah.nama,
