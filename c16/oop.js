@@ -103,8 +103,6 @@ class HondaCivic extends Car {
 
 
 let Honda = new CarFactory;
-// let mobilku = Honda.create('HondaJazz');
-// console.log(mobilku.tyre);
+
 let mobil2021 = Honda.manufacture(2021);
-// console.log(mobil2021)
 CarFactory.warrantySimulation(mobil2021, 2025)
