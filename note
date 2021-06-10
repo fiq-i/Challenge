@@ -1,0 +1,7 @@
+node JS tidak bisa baca import export
+harus pake babel
+pas di c17
+npm install
+pake babel-cli
+npm install babel-preset-es2015
+install babel node
