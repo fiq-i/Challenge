@@ -1,43 +1,28 @@
 class CarFactory {
-    
-    // create (model, year) {
-    //     switch (model){
-    //         case 'HondaJazz' :
-    //             return new HondaJazz(year);
-    //         case 'HondaBrio' :
-    //             return new HondaBrio(year);
-    //         case 'HondaCivic' :
-    //             return new HondaCivic(year);
-    //     }
-    // }
-    
 
     manufacture(year){
-        let cars = [];
-        let x = Math.floor(Math.random() * 10)
-        for (let i = 0; i <= x; i++){
-            let mobilku = new HondaJazz(year)
-            cars.push(mobilku)
-        }
-        console.log (`memproduksi ${x} Honda Jazz pertahun`)
-        let y = Math.floor(Math.random() * 10) 
-        for (let i = 0; i <= y; i++){
-            let mobilku = new HondaBrio(year)
-            cars.push(mobilku)
-        }
-        console.log (`memproduksi ${y} Honda Brio pertahun`)
-        let z = Math.floor(Math.random() * 10) 
-        for (let i = 0; i <= z; i++){
-            let mobilku = new HondaCivic(year)
-            cars.push(mobilku)
-        }
-        console.log (`memproduksi ${z} Honda Civic pertahun`)
-        // console.log(cars)
-        return cars
+        let a = [];
+        let b = a.concat(this.produce(HondaJazz, year))
+        let c = b.concat(this.produce(HondaBrio, year))
+        let manufacturedCars = c.concat(this.produce(HondaCivic, year))
+        return manufacturedCars
+
     }
 
+        generateNumber(){
+            return Math.floor(Math.random() * 10)
+        }
         
-    
+        produce(type, year){
+            let producedCars = [];
+            let x = this.generateNumber()
+                for (let i = 0; i <= x; i++){
+                    let mobilku = new type(year)
+                    producedCars.push(mobilku)
+                }
+            return producedCars
+        }
+
     static warrantySimulation(array, year){
         array.forEach(element => {
             element.age = year - element.year
@@ -47,7 +32,6 @@ class CarFactory {
             }
         });
     }
-
 }
 
 class Car {
@@ -125,6 +109,4 @@ let Honda = new CarFactory;
 // let mobilku = Honda.create('HondaJazz');
 // console.log(mobilku.tyre);
 let mobil2021 = Honda.manufacture(2021);
-
-
 CarFactory.warrantySimulation(mobil2021, 2024)
