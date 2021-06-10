@@ -10,25 +10,23 @@ export default class MesinHitung {
     }
 
     add(x){ 
-         this.x = this.x + x  
+         this.x += x  
          return this
     }
 
     substract(x){
-         this.x = this.x - x
+         this.x -= x
          return this
     }
 
     multiply(x){
-        if (x == 'Pi'){
-            x = 22/7
-        }
-         this.x = this.x * x
+        
+         this.x *= x
          return this
     }
 
     divide(x){
-         this.x = (this.x) / x
+         this.x /= x
          return this
     }
 
@@ -47,3 +45,6 @@ export default class MesinHitung {
          return this
     }
 }
+
+const PI = 22/7;
+export {PI}
