@@ -55,6 +55,12 @@ class Car {
         return uuid;
     }
 }
+class Tyre {
+    constructor(brand, size){
+        this.brand = brand;
+        this.size = size
+    }
+}
 
 class HondaJazz extends Car {
     constructor(year)
@@ -68,6 +74,7 @@ class HondaJazz extends Car {
         this.warranty = 5;
         this.year = year;
     }
+
 }
 
 class HondaBrio extends Car {
@@ -98,15 +105,11 @@ class HondaCivic extends Car {
     }
 }
 
-class Tyre {
-    constructor(brand, size){
-        this.brand = brand;
-        this.size = size
-    }
-}
+
 
 let Honda = new CarFactory;
 // let mobilku = Honda.create('HondaJazz');
 // console.log(mobilku.tyre);
 let mobil2021 = Honda.manufacture(2021);
-CarFactory.warrantySimulation(mobil2021, 2024)
+console.log(mobil2021)
+// CarFactory.warrantySimulation(mobil2021, 2024)
