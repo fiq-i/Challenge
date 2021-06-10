@@ -11,3 +11,4 @@ mh.square().multiply('Pi').result(); // 154
 mh.x = 4;
 mh.exponent(3).result();// 4 pangkat 3 = 64
 mh.squareRoot().result();// akar pangkat 2 dari 64 = 8
+
