@@ -1,6 +1,6 @@
 class CarFactory {
 
-    manufacture(year){
+    manufacture(year) {
         let a = [];
         let b = a.concat(this.produce(HondaJazz, year))
         let c = b.concat(this.produce(HondaBrio, year))
@@ -9,25 +9,24 @@ class CarFactory {
 
     }
 
-        generateNumber(){
-            return Math.floor(Math.random() * 10)
-        }
-        
-        produce(type, year){
-            let producedCars = [];
-            let x = this.generateNumber()
-                for (let i = 0; i <= x; i++){
-                    let mobilku = new type(year)
-                    producedCars.push(mobilku)
-                }
-            return producedCars
-        }
+    generateNumber() {
+        return Math.floor(Math.random() * 10)
+    }
 
-     static warrantySimulation(array, simulatedYear){
+    produce(type, year) {
+        let producedCars = [];
+        let x = this.generateNumber()
+        for (let i = 0; i <= x; i++) {
+            let mobilku = new type(year)
+            producedCars.push(mobilku)
+        }
+        return producedCars
+    }
+
+    static warrantySimulation(array, simulatedYear) {
         array.forEach(element => {
             element.age = simulatedYear - element.year
-            if (element.age > element.warranty)
-            {
+            if (element.age > element.warranty) {
                 console.log(`garansi mobil dengan merk ${element.name} dan id ${element.id} telah habis`)
             }
         });
@@ -35,8 +34,7 @@ class CarFactory {
 }
 
 class Car {
-    constructor(name, tyre, seat, door)
-    {
+    constructor(name, tyre, seat, door) {
         this.name = name;
         this.color = "standard white";
         this.tyre = tyre;
@@ -45,26 +43,25 @@ class Car {
         this.age = 0;
         this.id = this.create_UUID();
     }
-     create_UUID(){
+    create_UUID() {
         var dt = new Date().getTime();
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = (dt + Math.random()*16)%16 | 0;
-            dt = Math.floor(dt/16);
-            return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (dt + Math.random() * 16) % 16 | 0;
+            dt = Math.floor(dt / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
         });
         return uuid;
     }
 }
 class Tyre {
-    constructor(brand, size){
+    constructor(brand, size) {
         this.brand = brand;
         this.size = size
     }
 }
 
 class HondaJazz extends Car {
-    constructor(year)
-    {          
+    constructor(year) {
         super()
         this.name = 'HondaJazz';
         this.color = 'red';
@@ -78,12 +75,11 @@ class HondaJazz extends Car {
 }
 
 class HondaBrio extends Car {
-    constructor(year)
-    {          
+    constructor(year) {
         super()
         this.name = 'HondaBrio';
         this.color = 'black';
-        this.tyre = new Tyre ('Michellin', 6);
+        this.tyre = new Tyre('Michellin', 6);
         this.seat = 2;
         this.door = 4;
         this.warranty = 2;
@@ -92,8 +88,7 @@ class HondaBrio extends Car {
 }
 
 class HondaCivic extends Car {
-    constructor(year)
-    {          
+    constructor(year) {
         super()
         this.name = 'HondaCivic';
         this.color = 'yellow';
