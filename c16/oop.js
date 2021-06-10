@@ -19,7 +19,7 @@ class CarFactory {
             let mobilku = new type(year)
             producedCars.push(mobilku)
         }
-        console.log(`Telah memproduksi mobil ${type.name} sebanyak ${x}`)
+        console.log(`Telah memproduksi mobil ${type.name} sebanyak ${x+1}`)
         return producedCars
     }
 
@@ -50,6 +50,7 @@ class Car {
           });
     }
 }
+
 class Tyre {
     constructor(brand, size) {
         this.brand = brand;
@@ -68,7 +69,6 @@ class HondaJazz extends Car {
         this.warranty = 5;
         this.year = year;
     }
-
 }
 
 class HondaBrio extends Car {
@@ -99,5 +99,5 @@ class HondaCivic extends Car {
 let Honda = new CarFactory;
 
 let mobil2021 = Honda.manufacture(2021);
-
+console.log(mobil2021.length)
 // CarFactory.warrantySimulation(mobil2021, 2025)
