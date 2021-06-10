@@ -5,6 +5,7 @@ class CarFactory {
         let b = a.concat(this.produce(HondaJazz, year))
         let c = b.concat(this.produce(HondaBrio, year))
         let manufacturedCars = c.concat(this.produce(HondaCivic, year))
+        console.log(`Total mobil yang dibuat adalah ${manufacturedCars.length}`)
         return manufacturedCars
     }
 
@@ -99,5 +100,4 @@ class HondaCivic extends Car {
 let Honda = new CarFactory;
 
 let mobil2021 = Honda.manufacture(2021);
-console.log(mobil2021.length)
-// CarFactory.warrantySimulation(mobil2021, 2025)
+CarFactory.warrantySimulation(mobil2021, 2025)
