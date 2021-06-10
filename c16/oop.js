@@ -6,7 +6,6 @@ class CarFactory {
         let c = b.concat(this.produce(HondaBrio, year))
         let manufacturedCars = c.concat(this.produce(HondaCivic, year))
         return manufacturedCars
-
     }
 
     generateNumber() {
@@ -20,6 +19,7 @@ class CarFactory {
             let mobilku = new type(year)
             producedCars.push(mobilku)
         }
+        
         return producedCars
     }
 
@@ -44,13 +44,10 @@ class Car {
         this.id = this.create_UUID();
     }
     create_UUID() {
-        var dt = new Date().getTime();
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (dt + Math.random() * 16) % 16 | 0;
-            dt = Math.floor(dt / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
-        return uuid;
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+          });
     }
 }
 class Tyre {
@@ -99,9 +96,6 @@ class HondaCivic extends Car {
         this.year = year;
     }
 }
-
-
-
 let Honda = new CarFactory;
 
 let mobil2021 = Honda.manufacture(2021);
