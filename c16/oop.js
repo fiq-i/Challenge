@@ -19,7 +19,7 @@ class CarFactory {
             let mobilku = new type(year)
             producedCars.push(mobilku)
         }
-        
+        console.log(`Telah memproduksi mobil ${type.name} sebanyak ${x}`)
         return producedCars
     }
 
@@ -99,4 +99,5 @@ class HondaCivic extends Car {
 let Honda = new CarFactory;
 
 let mobil2021 = Honda.manufacture(2021);
-CarFactory.warrantySimulation(mobil2021, 2025)
+
+// CarFactory.warrantySimulation(mobil2021, 2025)
