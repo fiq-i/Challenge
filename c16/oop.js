@@ -23,12 +23,12 @@ class CarFactory {
             return producedCars
         }
 
-    static warrantySimulation(array, year){
+     static warrantySimulation(array, simulatedYear){
         array.forEach(element => {
-            element.age = year - element.year
+            element.age = simulatedYear - element.year
             if (element.age > element.warranty)
             {
-                console.log(`garansi mobil dengan id ${element.id} telah habis`)
+                console.log(`garansi mobil dengan merk ${element.name} dan id ${element.id} telah habis`)
             }
         });
     }
@@ -111,5 +111,5 @@ let Honda = new CarFactory;
 // let mobilku = Honda.create('HondaJazz');
 // console.log(mobilku.tyre);
 let mobil2021 = Honda.manufacture(2021);
-console.log(mobil2021)
-// CarFactory.warrantySimulation(mobil2021, 2024)
+// console.log(mobil2021)
+CarFactory.warrantySimulation(mobil2021, 2025)
