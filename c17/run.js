@@ -1,4 +1,4 @@
-import {MesinHitung} from '/MesinHitung.js'
+import MesinHitung from './MesinHitung'
 
 var mh = new MesinHitung ();
 mh.add(10).substract(5).result(); // 1 + 10 - 5 = 6

@@ -1,4 +1,4 @@
-class MesinHitung {
+export default class MesinHitung {
     //write code here
 
     constructor (){
@@ -47,5 +47,3 @@ class MesinHitung {
          return this
     }
 }
-
-  export {MesinHitung};
