@@ -63,7 +63,7 @@ logout = () => {
     [5] Kontrak
     [6] Keluar\n==================================================================
     `);
-    rl.question("Masukan salah satu no.  dari opsi di atas:", (Number) => {
+    rl.question("Masukan salah satu no. dari opsi di atas:", (Number) => {
         switch (Number) {
             case "1":
                 menuStudent();
