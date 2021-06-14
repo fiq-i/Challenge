@@ -69,16 +69,20 @@ mainMenu = () => {
                 opsi1.menu('mahasiswa')
                 break;
             case "2":
-                menuMajor();
+                let opsi2 = new majorMenu;
+                opsi2.menu('jurusan')
                 break;
             case "3":
-                menuLecturer();
+                let opsi3 = new lecturerMenu;
+                opsi3.menu('dosen')
                 break;
             case "4":
-                menuSubject();
+                let opsi4 = new subjectMenu;
+                opsi4.menu('matakuliah')
                 break;
             case "5":
-                menuContract();
+                let opsi5 = new contractMenu;
+                opsi5.menu('kontrak')
                 break;
             case "6":
                 logout();
@@ -99,13 +103,13 @@ class menu {
     add(type) { this.menu(type)}
     erase(type) { this.menu(type) }
     menu = (type) => {
-        console.log(`==========================================================================
+        console.log(`================================================================
         silahkan pilih opsi dibawah ini 
         [1] daftar ${type}
         [2] cari ${type}
         [3] tambah ${type}
         [4] hapus ${type}
-        [5] kembali\n==========================================================================
+        [5] kembali\n================================================================
         `);
         rl.question("Masukan salah satu no. opsi di atas:", (option) => {
             switch (option) {
@@ -140,9 +144,9 @@ class studentMenu extends menu {
         this.type = type
     }
     list = () => {
-        let sql = `SELECT mahasiswa.*
+        let sql1 = `SELECT mahasiswa.*
         FROM mahasiswa`
-        db.all(sql, (err, row) => {
+        db.all(sql1, (err, row) => {
             if (err) throw err;
             if (row) {
                 let table = new Table({
@@ -156,7 +160,6 @@ class studentMenu extends menu {
                 console.log(table.toString());
             }
         super.list('mahasiswa')
-        // super.menu('mahasiswa')
         })
         
     }
@@ -164,23 +167,23 @@ class studentMenu extends menu {
     search = () => {
         console.log('=======================================================');
         rl.question("Masukan Nim:", (nim) => {
-            let sql = `SELECT * FROM mahasiswa WHERE nim=?`;
-            db.get(sql, [nim], (err, mahasiswa) => {
+            let sql2 = `SELECT * FROM mahasiswa WHERE nim=?`;
+            db.get(sql2, [nim], (err, mahasiswa) => {
                 if (err) throw err;
                 if (mahasiswa) {
                     console.log('NIM        : ', `${mahasiswa.nim}`);
                     console.log('nama       : ', `${mahasiswa.nama}`);
                     console.log('alamat     : ', `${mahasiswa.alamat}`);
                     console.log('jurusan    : ', `${mahasiswa.jurusan}`);
-                    menuStudent();
+                    super.search('mahasiswa')
                 }
                 else {
                     console.log("NIM tidak terdaftar!");
-                    searchStudent();
+                    super.search('mahasiswa');
                 }
             })
+            super.search('mahasiswa')
         })
-        super.search()
     }
 
     add = () => {
@@ -188,34 +191,188 @@ class studentMenu extends menu {
         rl.question("Nama Mahasiswa:", (nama_mhs) => {
             rl.question("jurusan:", (jurusan) => {
                 rl.question("alamat:", (alamat) => {
-                    const sql = `INSERT INTO mahasiswa (nama, jurusan, alamat)VALUES (?,?,?)`;
-                    id_nama = nama_mhs;
-                    id_jurusan = jurusan;
-                    id_alamat = alamat;
-                    db.all(sql, [id_nama, id_jurusan, id_alamat], (err) => {
+                    let sql3 = `INSERT INTO mahasiswa (nama, jurusan, alamat)VALUES (?,?,?)`;
+                    let id_nama = nama_mhs;
+                    let id_jurusan = jurusan;
+                    let id_alamat = alamat;
+                    db.all(sql3, [id_nama, id_jurusan, id_alamat], (err) => {
                         if (err) throw err;
                         console.log('sukses menambahkan mahasiswa');
-                        listStudent();
+                        super.list('mahasiswa');
                     })
                 })
             })
         })
-        super.add()
     }
+    
     erase = () => {
-        const sql = `DELETE FROM mahasiswa WHERE nim=?`;
+        let sql4 = `DELETE FROM mahasiswa WHERE nim=?`;
         rl.question("Masukan NIM mahasiswa yang akan dihapus:", nim => {
-            identitasmhs = nim;
-            db.run(sql, [identitasmhs], (err, row) => {
+            let identitasmhs = nim;
+            db.run(sql4, [identitasmhs], (err, row) => {
                 if (err) throw err;
                 console.log(`mahasiswa dengan nim ${identitasmhs} telah dihapus`)
-                listStudent();
-                menuStudent();
+                super.list('mahasiswa');
             })
         })
-        super.erase()
     }
 }
+class majorMenu extends menu {
+    constructor(type) {
+        super(type)
+        this.type = type
+    }
+
+    list = () =>{
+        let sql = `SELECT * FROM jurusan`;
+        db.all(sql, (err, row) =>{
+            if (err) throw err;
+            if (row) {let table = new Table({
+                head: ['KODE JURUSAN', 'NAMA JURUSAN']});
+                row.forEach((jurusan) => 
+                table.push(
+                    [`${jurusan.kode_jurusan}`, `${jurusan.nama}`]
+                ))
+                console.log(table.toString());
+            }
+            super.list('jurusan')
+      })}
+      search = () => {
+          console.log('=======================================================');
+          rl.question('Masukan Kode Jurusan :', (kode) => {
+              let sql = `SELECT * FROM jurusan WHERE kode_jurusan =?`;
+              db.get(sql, [kode], (err, jurusan) => {
+                  if (err) throw err;
+                  if (jurusan) {
+                      console.log('KODE JURUSAN :', `${jurusan.kode_jurusan}`);
+                      console.log('NAMA JURUSAN', `${jurusan.nama}`);
+                      super.search('jurusan')
+                  }
+                  else {
+                      console.log('Kode Jurusan tidak terdaftar!');
+                      super.search('jurusan')
+                  }
+              }) 
+          })
+          super.search('jurusan')
+      }
+      add = () => {
+          console.log('Lengkapi data di bawah ini');
+          rl.question("Kode Jurusan :", (kode) => {
+              rl.question("Nama Jurusan :", (nama) => {
+                  let sql = 'INSERT INTO jurusan (kode_jurusan, nama) VALUES (?, ?)';
+                  let kd = kode;
+                  let nm = nama;
+                  db.all(sql, [kd, nm], (err) => {
+                      if (err) throw err;
+                      console.log('Sukses menambahkan jurusan');
+                      super.list('jurusan');
+                  })
+              })
+          })
+      }
+      erase = () => {
+          let sql = `DELETE FROM jurusan WHERE kode_jurusan=?`;
+          rl.question("Masukan kode jurusan yang akan dihapus :", kode => {
+              let kd = kode;
+              db.run(sql, [kd], (err, row) => {
+                  if (err) throw err;
+                  console.log(`Jurusan dengan kode jurusan ${kd} telah dihapus`)
+                  super.list('jurusan')
+              })
+          })
+      }
+    }
+
+class lecturerMenu extends menu {
+    constructor(type) {
+        super(type)
+        this.type = type
+    }
+
+    list = () =>{
+        let sql = `SELECT * FROM dosen`;
+        db.all(sql, (err, row) =>{
+            if (err) throw err;
+            if (row) {let table = new Table({
+                head: ['NIP', 'NAMA']});
+                row.forEach((dosen) => 
+                table.push(
+                    [`${dosen.nip}`, `${dosen.nama}`]
+                ))
+                console.log(table.toString());
+            }
+            super.list('dosen')
+      })}
+      search = () => {
+        console.log('=======================================================');
+        rl.question("Masukan kode dosen :", (kd) => {
+            let sql = `SELECT * FROM dosen WHERE nip =?`
+            db.get(sql, [kd], (err, dosen) => {
+                if(err) throw err;
+                if(dosen) {
+                    console.log(`Kode Dosen :`, `${dosen.nip}`)
+                    console.log(`Nama Dosen :`, `${dosen.nama}`)
+                    super.search('dosen')
+                }
+                else {
+                    console.log(`Kode dosen tidak terdaftar!`)
+                    super.search('dosen')
+                }
+            })
+        })
+      }
+      add = () => {
+          console.log(`Lengkapi data di bawah ini`);
+          rl.question("Kode Dosen :", (kode) => {
+              rl.question("Nama Dosen :", (nama) =>{
+                  let sql = `INSERT INTO dosen (nip, nama) VALUES (?, ?)`;
+                  let kd = kode;
+                  let nm = nama;
+                  db.all(sql, [kd, nm], (err) => {
+                      if (err) throw err;
+                      console.log(`sukses menambahkan dosen`);
+                      super.list('dosen');
+                  })
+              })
+          })
+      }
+      erase = () =>{
+          let sql = 'DELETE FROM dosen WHERE nip=?';
+          rl.question('Masukkan kode dosen yang akan dihapus :', kode =>{
+              let kd = kode;
+              db.run(sql, [kd], (err, row)=> {
+                  if (err) throw err;
+                  console.log (`Dosen dengan kode dosen ${kd} telah dihapus`)
+                  super.list('dosen')
+              })
+          })
+      }
+    }
+class subjectMenu extends menu {
+    constructor (type) {
+        super(type)
+        this.type = type
+    }
+    list = () => {
+        let sql = `SELECT * FROM mata_kuliah`;
+        db.all(sql, (err, row) => {
+            if (err) throw err;
+            if (row) {
+                let table = new Table({
+                    head: [`KODE MATA KULIAH`, `NAMA MATA KULIAH`, 'SKS', 'KODE PENGAJAR']});
+                    row.forEach((mata_kuliah) =>
+                    table.push (
+                        [`${mata_kuliah.kode_matkul}`, `${mata_kuliah.nama}`, `${mata_kuliah.sks}`, `${mata_kuliah.kode_pengajar}`]
+                    ))
+                    console.log(table.toString());
+                }
+                super.list('jurusan')
+            })}
+}
+
+
+
 
 
 login()
