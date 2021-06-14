@@ -1,6 +1,6 @@
-// import {studentMenu, subjectMenu, classMenu, lecturerMenu, majorMenu} from './functional'
-const readline = require('readline');
-
+// import {studentMenu, subjectMenu, classMenu, lecturerMenu, majorMenu} from './functional.js'
+// const readline = require('readline');
+import readline from 'readline'
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('universitas.db', err => {
     if (err) {
