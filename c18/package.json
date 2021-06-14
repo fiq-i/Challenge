@@ -13,5 +13,6 @@
     "cli-table": "^0.3.6",
     "sqlite3": "^5.0.2"
   },
+  "devDependencies": {},
   "description": ""
 }
