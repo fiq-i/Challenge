@@ -1,4 +1,5 @@
 const readline = require('readline');
+// import readline from 'readline';
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('universitas.db', err => {
     if (err) {
@@ -508,9 +509,6 @@ class classMenu extends menu {
         })
     }
 }
-
-
-
 
 
 login()

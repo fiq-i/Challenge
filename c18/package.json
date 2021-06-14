@@ -1,18 +1,17 @@
 {
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "cli-table": "^0.3.6",
+    "sqlite3": "^5.0.2"
+  },
   "name": "c18",
   "version": "1.0.0",
-  "main": "solution.js",
+  "main": "functional.js",
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "cli-table": "^0.3.6",
-    "sqlite3": "^5.0.2"
-  },
-  "devDependencies": {},
   "description": ""
 }

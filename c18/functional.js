@@ -1,3 +1,16 @@
+const readline = require('readline');
+import readline from 'readline';
+const sqlite3 = require('sqlite3').verbose();
+let db = new sqlite3.Database('universitas.db', err => {
+    if (err) {
+        return console.log('database error');
+    }
+});
+const Table = require('cli-table');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 class menu {
     constructor(type) {
         this.type = type;
@@ -411,4 +424,8 @@ class classMenu extends menu {
         })
     }
 }
-export {studentMenu, majorMenu, lecturerMenu, subjectMenu, classMenu}
+
+
+
+
+export {studentMenu, subjectMenu, classMenu, lecturerMenu, majorMenu}
