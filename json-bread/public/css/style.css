@@ -5,6 +5,10 @@
   td{
     text-align:center; background-color:wheat;
   }
+  .input{
+    width: 1000px;
+    height: 20px;
+  }
 .edit{
     background-color: #16d31c; /* Green */
   border: none;
