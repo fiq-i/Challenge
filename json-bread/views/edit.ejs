@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/json-bread/public/css/style.css">
   <meta charset="UTF-8">
   <title>MY APP</title>
 </head>
 <body>
   <h1>Edit Data</h1>
   <form action="" method="POST">
-    <input type="hidden" name="id"  class="form-control" value ="<%choice.ID%>" placeholder="ID" >
+    <label for="ID">ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <input type="number" name="id"  value ="<%=x%>" placeholder="ID" readonly ><br><br>
     <label for="name">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
     <input type="text" id="name" name="name" placeholder=" <%choice.name%> " class= "input"  value = "<%=(choice.name)%>"><br><br>
     <label for="weight">Weight (kg)&nbsp;&nbsp;&nbsp;&nbsp;</label>

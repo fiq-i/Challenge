@@ -29,6 +29,7 @@ app.post('/add', (req, res) => {
 })
 
 // app.get('/erase', (req, res) => res.redirect('/'))
+
 app.get('/erase/:ID', (req, res) => {
     let x = (req.params.ID - 1);
     let data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
@@ -40,7 +41,7 @@ app.get('/erase/:ID', (req, res) => {
 app.get('/edit/:ID', (req, res) => {
     let data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
     let x = (req.params.ID - 1);
-    res.render('edit', { choice: data[x] })
+    res.render('edit', { choice: data[x], x })
 })
 
 app.post('/edit/:ID', (req, res) => {
