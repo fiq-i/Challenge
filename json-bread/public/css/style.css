@@ -1,0 +1,44 @@
+
+  table, th {
+    border: none; 
+  }
+  td{
+    text-align:center; background-color:wheat;
+  }
+.edit{
+    background-color: #16d31c; /* Green */
+  border: none;
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+  display: inline-block;
+}  
+.delete{
+    background-color: red;
+  border: none;
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+.add{
+    background-color:rgb(81, 17, 231); 
+  color: white;
+  padding: 10px;
+  text-decoration:rgb(19, 0, 128);
+    display: inline-block;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px
+}
+.save{
+  background-color:purple; 
+  color: white;
+  padding: 10px;
+  border: none;
+  text-decoration:purple;
+    display: inline-block;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px
+}
