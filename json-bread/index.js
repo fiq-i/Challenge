@@ -40,7 +40,7 @@ app.get('/erase/:ID', (req, res) => {
 app.get('/edit/:ID', (req, res) => {
     let data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
     let x = (req.params.ID - 1);
-    res.render('edit.ejs', { choice: data[x] })
+    res.render('edit', { choice: data[x] })
 })
 
 app.post('/edit/:ID', (req, res) => {
