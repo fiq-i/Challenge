@@ -1,165 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <meta charset="UTF-8">
-  <title>MY APP</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta charset="UTF-8">
+    <title>MY APP</title>
 </head>
 
 <body>
-  <div class="container" style="padding-top: 20px">
     <h2>Filters</h2>
-    <form action="/" method="GET">       
-      <input type="hidden" name="page" value="1" /> 
-      <!---------Menampilkan box id------->
-    <div class="row">
-        <div class="col-sm-2"> 
-                <input  
-                type="hidden" value="x1"
-                name="x1"
-                <%=
-                 test.ID == 'on'  %> 
-                /> ID
-            </div> 
-    </div>
-    <div class="col-sm-10">
-        <div class="form-group">
-            <input type="number" class="form-control" id="xID" name="xID"
-            placeholder="ID"/>
-        </div>
-    </div>
-    <!---------Menampilkan box String------->
-    <div class="container">
-      <div class="row">
-          <div class="col-sm-2"> 
-                  <input 
-                  type="hidden" value="x2"
-                  name="x2"
-                  />Name
-                  
-              </div> 
-      </div>
-      <div class="col-sm-10">
-          <div class="form-group">
-              <input 
-              type="text" 
-              class="form-control" 
-              id="name" 
-              name="xname"
-              placeholder="name"
-               />
-              </div>
-        </div>
-    </div>
-    <!---------Menampilkan box Integer------->
-    <div class="row">
-        <div class="col-sm-2"> 
-                <input  
-                type="hidden" value="x3"
-                name="x3"/>Weight
-            </div> 
-    </div>
-    <div class="col-sm-10">
-        <div class="form-group">
-            <input type="text" class="form-control" id="weight" name="xweight"
-            placeholder="weight" />
-        </div>
-    </div>
-    <!---------Menampilkan box Float------->
-    <div class="row">
-        <div class="col-sm-2"> 
-                <input  
-                type="hidden" value="x4" name="x4"/>Height
-            </div> 
-    </div>
-    <div class="col-sm-10">
-        <div class="form-group">
-            <input type="text" class="form-control" id="height" name="xheight"
-            placeholder="height" />
-        </div>
-    </div>
-    <!---------Menampilkan box Date------->
-    <div class="row">
-        <div class="col-sm-2"> 
-                <input 
-                type="hidden" value="x5" name="x5"/>Birthdate
-            </div> 
-    </div>
-    <div class="col-sm-10">
-        <div class="form-group">
-            <input type="date" class="form-control" id="birthdate" name="xdatestart"
-            placeholder="START DATE" />
-            TO
-            <input type="date" class="form-control" id="birthdate" name="xdateend"
-            placeholder="END DATE" />
-        </div>
-    </div>
+    <form action="/" method="GET">
 
-    <!---------Menampilkan box Bolean------->
-    <div class="row">
-        <div class="col-sm-2"> 
-                <input 
-                type="hidden" value="x6"name="x6"/>Status
-            </div> 
-    </div>
-    <div class="form-group row">    
-            <!-- <label for="colFormLabelSm" class="col-sm-1 col-form-label">Boolean</label> -->
-            <div class="col-sm-10">                    
-                <select class="form-control" id_type="exampleFormControlSelect1" name="xstatus">
-                <option value="">--pilih type--</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-                </select>
-            </div>    
+        <input type="hidden" value="x1" name="x1" <%=test.ID=='on' %> /> ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="number" class="form-control" id="xID" name="xID" placeholder="ID" min="0"/>
+        <div>
+            <br>
+            <input type="hidden" value="x2" name="x2" />Name
+            <input type="text" style="margin-left:40px" class="form-control" id="name" name="xname" placeholder="name" />
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
-        <table class="table table-striped table-dark" border="1">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Height</th>
-                <th scope="col">Birthdate</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
-            </tr>
-            <% data.forEach((data)=>{ %>
-              <tr>
-                  <td><%= data.ID %></td>
-                  <td><%= data.name %></td>
-                  <td><%= data.weight %></td>
-                  <td><%= data.height %></td>
-                  <td><%= data.birthdate %></td>
-                  <td><%= data.status %></td>
-                  <td><a class="btn btn-success" href="edit/<%= data.ID %>">Edit</a>
-                      <a class="btn btn-danger" href="deleted/<%= data.ID %>">Delete</a>
-                  </td>
-              </tr>
-            <% }) %>
-            
-        </table>
-        <a class="btn btn-primary" href="/add">ADD</a>
-        
-        <nav aria-label="Page navigation example" style="margin-top:1%">
-            <ul class="pagination" class="pagination justify-content-center">
-                <li class="page-item <%= current == 1 ? 'disabled' : ''%>"><a class="page-link"
-                        href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous</a>
-                </li>
-                <% for(let i = 1; i <= pages; i++){ %>
-                <li class="page-item <%= current == i ? 'active' : '' %>"><a class="page-link"
-                        href="<%= query.replace(`page=${current}`, `page=${i}`) %>"><%= i %></a></li>
-                <% } %>
-                <li class="page-item <%= current == pages ? 'disabled' : ''%>"><a class="page-link"
-                        href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    
-</div>
+        <br>
+        <div>
+            <input type="hidden" value="x3" name="x3" />Weight
+            <input type="text" class="form-control" style="margin-left:30px" id="weight" name="xweight" placeholder="weight" />
+        </div>
+        <br>
+        <div>
+            <input type="hidden" value="x4" name="x4" />Height
+            <input type="text" class="form-control" id="height" style="margin-left:30px" name="xheight" placeholder="height" />
+        </div>
+        <br>
+        <div>
+            <input type="hidden" value="x5" name="x5" />Birthdate
+            <input type="date" id="birthdate" name="xdatestart" placeholder="START DATE" style="margin-left:10px;  margin-bottom: 5px;"/>
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TO<br>
+            <input type="date" style="margin-left:90px; margin-top: 5px;" id="birthdate" name="xdateend" placeholder="END DATE" />
+            <br>  <br>
+            <div>
+                <input type="hidden" value="x6" name="x6" />Status
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select id_type="exampleFormControlSelect1" name="xstatus">
+                        <option value="">--pilih type--</option>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+            </div>
+            <br>
+            <button type="submit" >Search</button>
+            <table border="1">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Birthdate</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                <% data.forEach((data)=>{ %>
+                    <tr>
+                        <td>
+                            <%= data.ID %>
+                        </td>
+                        <td>
+                            <%= data.name %>
+                        </td>
+                        <td>
+                            <%= data.weight %>
+                        </td>
+                        <td>
+                            <%= data.height %>
+                        </td>
+                        <td>
+                            <%= data.birthdate %>
+                        </td>
+                        <td>
+                            <%= data.status %>
+                        </td>
+                        <td><a class="edit" href="edit/<%= data.ID %>">Edit</a>
+                            <a class="delete" href="delete/<%= data.ID %>">Delete</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
 
-</form>
-
+            <class="pagination" class="pagination justify-content-center">
+                <div <%=current==1 ? 'disabled' : '' %>"> 
+                    <a href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous|</a>
+                    <% for(let i=1; i <=pages; i++){ %>
+                        <a <%=current==i ? 'active' : '' %><a
+                                href="<%= query.replace(`page=${current}`, `page=${i}`) %>">
+                                <%= i %>
+                            </a>
+                            < <% } %>
+                                <a <%=current==pages ? 'disabled' : '' %>
+                                    <a href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">|Next</a>
+                                    <br>
+                                    <a class="add" href="/add">ADD</a>
+        </div>
+    </form>
 </body>
+
 </html>

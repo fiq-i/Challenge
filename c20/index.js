@@ -26,31 +26,11 @@ const sql_create = `CREATE TABLE IF NOT EXISTS superhero (
   status Boolean NOT NULL
 );`;
 
-// db.run(sql_create, err => {
-//   if (err) {
-//     return console.error(err.message);
-//   }
-//   console.log("Successful creation of the 'superhero' table");
-//   const sql_seed = `INSERT INTO superhero (name, weight, height, birthdate, status) VALUES
-// ('Superman', '200', '193.05', "1970-09-01", "true"),
-// ('Batman', '190', '187.45', "1968-01-30", "false"),
-// ('Green Lantern', '180', '186.5', "1970-12-11", "false"),
-// ('Wonder Woman', '190', '190.5', "1970-08-01", "false"),
-// ('Flash', '180', '171.5', "1970-01-15", "true");`;
-
-//   db.run(sql_seed, err => {
-//     if (err) {
-//       return console.error(err.message);
-//     }
-//     console.log("Successful seeding the 'superhero' table")
-//   });
-// });
-
 
 var current_page = 1;
 var records_per_page = 2;
 
-var obj = []; // Can be obtained from another source, such as your objJson variable
+var obj = []; 
 const sqlSelect = "SELECT * FROM superhero"
 db.all(sqlSelect, (err, rows) => {
   if (err) { return console.error(err.message) }
@@ -64,20 +44,6 @@ db.all(sqlSelect, (err, rows) => {
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
-// app.get("/", (req, res) => {
-
-
-//   // console.log(obj)
-
-//   const sql = "SELECT * FROM superhero"
-//   db.all(sql, [], (err, rows) => {
-//     if (err) {
-//       return console.error(err.message);
-//     }
-//     res.render("index.ejs", { model: rows });
-//   });
-
-// });
 
 
 app.get('/add', (req, res) => res.render('add'))
