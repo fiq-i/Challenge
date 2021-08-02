@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Superman",
+        "weight": "200",
+        "height": "193.05",
+        "birthdate": "1970-09-01",
+        "status": "true"
+    },
+    {
+        "name": "Batman",
+        "weight": 190,
+        "height": 187.45,
+        "birthdate": "1968-01-30",
+        "status": false
+    },
+    {
+        "name": "Green Lantern",
+        "weight": 180,
+        "height": 186.5,
+        "birthdate": "1970-12-11",
+        "status": false
+    },
+    {
+        "name": "Wonder Woman",
+        "weight": 190,
+        "height": 190.5,
+        "birthdate": "1970-08-01",
+        "status": false
+    }
+]
