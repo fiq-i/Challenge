@@ -12,40 +12,46 @@
     <h2>Filters</h2>
     <form action="/" method="GET">
 
-        <input type="hidden" value="x1" name="x1" <%=test.ID=='on' %> /> ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="number" class="form-control" id="xID" name="xID" placeholder="ID" min="0"/>
+        <input type="hidden" value="x1" name="x1" <%=test.ID=='on' %> /> ID
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="number" class="form-control" id="xID" name="xID" placeholder="ID" min="0" />
         <div>
             <br>
             <input type="hidden" value="x2" name="x2" />Name
-            <input type="text" style="margin-left:40px" class="form-control" id="name" name="xname" placeholder="name" />
+            <input type="text" style="margin-left:40px" class="form-control" id="name" name="xname"
+                placeholder="name" />
         </div>
         <br>
         <div>
             <input type="hidden" value="x3" name="x3" />Weight
-            <input type="text" class="form-control" style="margin-left:30px" id="weight" name="xweight" placeholder="weight" />
+            <input type="text" class="form-control" style="margin-left:30px" id="weight" name="xweight"
+                placeholder="weight" />
         </div>
         <br>
         <div>
             <input type="hidden" value="x4" name="x4" />Height
-            <input type="text" class="form-control" id="height" style="margin-left:30px" name="xheight" placeholder="height" />
+            <input type="text" class="form-control" id="height" style="margin-left:30px" name="xheight"
+                placeholder="height" />
         </div>
         <br>
         <div>
             <input type="hidden" value="x5" name="x5" />Birthdate
-            <input type="date" id="birthdate" name="xdatestart" placeholder="START DATE" style="margin-left:10px;  margin-bottom: 5px;"/>
+            <input type="date" id="birthdate" name="xdatestart" placeholder="START DATE"
+                style="margin-left:10px;  margin-bottom: 5px;" />
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TO<br>
-            <input type="date" style="margin-left:90px; margin-top: 5px;" id="birthdate" name="xdateend" placeholder="END DATE" />
-            <br>  <br>
+            <input type="date" style="margin-left:90px; margin-top: 5px;" id="birthdate" name="xdateend"
+                placeholder="END DATE" />
+            <br> <br>
             <div>
                 <input type="hidden" value="x6" name="x6" />Status
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select id_type="exampleFormControlSelect1" name="xstatus">
-                        <option value="">--pilih type--</option>
-                        <option value="true">true</option>
-                        <option value="false">false</option>
-                    </select>
+                    <option value="">--pilih type--</option>
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
             </div>
             <br>
-            <button type="submit" >Search</button>
+            <button type="submit">Search</button>
             <table border="1">
                 <tr>
                     <th scope="col">ID</th>
@@ -84,8 +90,9 @@
             </table>
 
             <class="pagination" class="pagination justify-content-center">
-                <div <%=current==1 ? 'disabled' : '' %>"> 
-                    <a href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous|</a>
+                <div <%=current==1 ? 'disabled' : '' %>">
+                    <a
+                        href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) - 1}`) %>">Previous|</a>
                     <% for(let i=1; i <=pages; i++){ %>
                         <a <%=current==i ? 'active' : '' %><a
                                 href="<%= query.replace(`page=${current}`, `page=${i}`) %>">
@@ -93,10 +100,11 @@
                             </a>
                             < <% } %>
                                 <a <%=current==pages ? 'disabled' : '' %>
-                                    <a href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">|Next</a>
+                                    <a
+                                        href="<%= query.replace(`page=${parseInt(current)}`, `page=${parseInt(current) + 1}`) %>">|Next</a>
                                     <br>
                                     <a class="add" href="/add">ADD</a>
-        </div>
+                </div>
     </form>
 </body>
 

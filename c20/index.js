@@ -27,8 +27,6 @@ const sql_create = `CREATE TABLE IF NOT EXISTS superhero (
 );`;
 
 
-var current_page = 1;
-var records_per_page = 2;
 
 var obj = []; 
 const sqlSelect = "SELECT * FROM superhero"

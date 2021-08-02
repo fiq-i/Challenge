@@ -1,57 +1,70 @@
+body {
+  background-color:powderblue;
+}
+table, th {
+  border: none;
+}
 
-  table, th {
-    border: none; 
-  }
-  td{
-    text-align:center; background-color:wheat;
-  }
-  .input{
-    width: 1000px;
-    height: 20px;
-  }
+td {
+  text-align: center;
+  background-color: wheat;
+}
 
-.edit{
-    background-color: #16d31c; /* Green */
+.input {
+  width: 1000px;
+  height: 20px;
+}
+
+.edit {
+  background-color: #16d31c;
+  /* Green */
   border: none;
   color: white;
   padding: 5px;
   text-decoration: none;
   display: inline-block;
   padding-right: 2px;
-}  
-.delete{
-    background-color: red;
+}
+
+.delete {
+  background-color: red;
   border: none;
   color: white;
   padding: 5px;
   text-decoration: none;
   display: inline-block;
 }
-.add{
+
+.add {
   background-color: teal;
-  color:white;
+  color: white;
   padding: 5px;
   display: inline-block;
   text-align: center;
   margin-left: 15px;
 }
-.save{
-  background-color:purple; 
+
+.save {
+  background-color: purple;
   color: white;
   padding: 10px;
   border: none;
-    display: inline-block;
+  display: inline-block;
   text-align: center;
   padding-left: 15px;
   padding-right: 15px
 }
 
-.form-control{
-  left: 30px; 
+.form-control {
+  left: 30px;
   top: 5 rem;
-    margin-left: 10px;
-    padding: 5px;
-    width : 70rem; height : 1rem;
+  margin-left: 10px;
+  padding: 5px;
+  width: 70rem;
+  height: 1rem;
   justify-content: left;
 }
-.button {background-color: #008CBA;}
+
+.button {
+  background-color: #008CBA;
+}
