@@ -34,25 +34,23 @@ module.exports = (pool) => {
     if (xStatus) {
       criteria.push(`"status" = '${xStatus}'`)
       flag = true
-    }
-    //------------------------------------------------------------------------------------ 
+    } 
     // conversi dari array ke string
     let joindata = criteria.join(' and ');
 
     console.log(joindata);
 
-    let sql = `SELECT count(*) as total FROM superhero`;
-    //  kondisi ketika filter
+    let sql = `SELECT count(*) as total FROM superhero`; 
     if (flag == true) {
       sql += ` where ${joindata} `
     }
     pool.query(sql, [], (err, count) => {
-      let rows = count.rows[0].total //jumlah data dalam table
+      let rows = count.rows[0].total / 
       console.log(count[0]);
 
-      let page = req.query.page || 1; // nilai awal page
-      let limit = 3; // batas data yang di tampilkan 
-      let totalPage = Math.ceil(rows / limit) // mencari jumlah data
+      let page = req.query.page || 1; //  
+      let limit = 2; //   
+      let totalPage = Math.ceil(rows / limit)  
       let pages = (page - 1) * limit
       let queries = req.url === '/' ? '/?page=1' : req.url;
       let Query = req.query;
@@ -71,8 +69,7 @@ module.exports = (pool) => {
       })
 
 
-    });
-    //---------ADD-----------\\
+    }); 
     router.get('/add', (req, row) => row.render('add'))
     router.post('/add', (req, res) => {
       const sqladd = `INSERT INTO superhero ("name", "weight", "height", "birthdate", "status") VALUES($1,$2,$3,$4,$5)`
@@ -84,8 +81,7 @@ module.exports = (pool) => {
       })
     });
 
-
-    //------------------EDIT------------\\
+ 
     router.get('/edit/:ID', (req, res) => {
       let edit = req.params.ID;
       let sqlgetedit = `SELECT * FROM superhero WHERE "ID"=${edit}`;
