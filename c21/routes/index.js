@@ -3,48 +3,47 @@ var router = express.Router();
 
 
 
-/* GET home page. */
 module.exports = (pool) => {
 
   router.get('/', function (req, res, next) {
-    const {nmid, nmstring, nminteger, nmfloat, nmdatestart, nmdateend, nmboolean } = req.query;
-    // data untuk menampung filter
-    let temp = []
-    let stat = false
-    // ---------------------------- function filter ----------------------------
-    if (nmid) {
-      temp.push(`"ID" = ${nmid}`)
-      stat = true
+    const {xId, xName, xWeight, xHeight, xDateStart, xDateEnd, xStatus } = req.query;
+
+    let criteria = []
+    let flag = false
+    
+    if (xId) {
+      criteria.push(`"ID" = ${xId}`)
+      flag = true
     }
-    if (nmstring) {
-      temp.push(`"name" = '${nmstring}'`)
-      stat = true
+    if (xName) {
+      criteria.push(`"name" = '${xName}'`)
+      flag = true
     }
-    if (nminteger) {
-      temp.push(`"weight" = ${nminteger}`)
-      stat = true
+    if (xWeight) {
+      criteria.push(`"weight" = ${xWeight}`)
+      flag = true
     }
-    if (nmfloat) {
-      temp.push(`"height" = ${nmfloat}`)
-      stat = true
+    if (xHeight) {
+      criteria.push(`"height" = ${xHeight}`)
+      flag = true
     }
-    if (nmdatestart && nmdateend) {
-      temp.push(`"birthdate" BETWEEN '${nmdatestart}' and '${nmdateend}'`)
-      stat = true
+    if (xDateStart && xDateEnd) {
+      criteria.push(`"birthdate" BETWEEN '${xDateStart}' and '${xDateEnd}'`)
+      flag = true
     }
-    if (nmboolean) {
-      temp.push(`"status" = '${nmboolean}'`)
-      stat = true
+    if (xStatus) {
+      criteria.push(`"status" = '${xStatus}'`)
+      flag = true
     }
     //------------------------------------------------------------------------------------ 
     // conversi dari array ke string
-    let joindata = temp.join(' and ');
+    let joindata = criteria.join(' and ');
 
     console.log(joindata);
 
     let sql = `SELECT count(*) as total FROM superhero`;
     //  kondisi ketika filter
-    if (stat == true) {
+    if (flag == true) {
       sql += ` where ${joindata} `
     }
     pool.query(sql, [], (err, count) => {
@@ -59,7 +58,7 @@ module.exports = (pool) => {
       let Query = req.query;
 
       sql = `select * from superhero`;
-      if (stat == true) {
+      if (flag == true) {
         sql += ` where ${joindata} `
       }
       sql += ` LIMIT ${limit} OFFSET ${pages}`
