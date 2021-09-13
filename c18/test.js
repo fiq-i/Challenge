@@ -61,7 +61,7 @@ mainMenu = () => {
     [2] Jurusan
     [3] Dosen
     [4] Matakuliah
-    [5] Kelas
+    [5] Kontrak
     [6] Keluar\n==================================================================
     `);
     rl.question("Masukan salah satu no.  dari opsi di atas:", (Number) => {
@@ -83,8 +83,8 @@ mainMenu = () => {
                 opsi4.menu('mata_kuliah')
                 break;
             case "5":
-                let opsi5 = new classMenu;
-                opsi5.menu('kelas')
+                let opsi5 = new contractMenu;
+                opsi5.menu('kontrak')
                 break;
             case "6":
                 logout();
@@ -117,7 +117,6 @@ class menu {
             switch (option) {
                 case "1":
                     this.list();
-                    // this.menu(type);
                     break;
                 case "2":
                     this.search();
@@ -180,7 +179,7 @@ class studentMenu extends menu {
                 }
                 else {
                     console.log("NIM tidak terdaftar!");
-                    super.search('mahasiswa');
+                    this.search()
                 }
             })
             super.search('mahasiswa')
@@ -378,20 +377,20 @@ class subjectMenu extends menu {
             super.list('mata_kuliah')
         })
     }
-    search = () =>{
+    search = () => {
         console.log('=======================================================');
-        rl.question("Masukan kode mata kuliah :", (kode)=> {
+        rl.question("Masukan kode mata kuliah :", (kode) => {
             let sql = `SELECT * FROM mata_kuliah WHERE kode_matkul=?`;
             db.get(sql, [kode], (err, mata_kuliah) => {
-                if(err) throw err;
-                if(mata_kuliah) {
+                if (err) throw err;
+                if (mata_kuliah) {
                     console.log('Kode Mata Kuliah :', `${mata_kuliah.kode_matkul}`);
                     console.log('Nama Mata Kuliah :', `${mata_kuliah.nama}`);
                     console.log('SKS :', `${mata_kuliah.sks}`);
                     console.log('Kode Pengajar :', `${mata_kuliah.kode_pengajar}`);
                     super.search('mata_kuliah')
                 }
-                else{
+                else {
                     console.log(`Kode Mata Kuliah tidak terdaftar!`);
                     super.search('mata_kuliah');
                 }
@@ -423,7 +422,7 @@ class subjectMenu extends menu {
     }
     erase = () => {
         let sql = `DELETE FROM mata_kuliah where kode_matkul=?`;
-        rl.question ("Masukkan kode mata kuliah yang akan dihapus:", kode =>{
+        rl.question("Masukkan kode mata kuliah yang akan dihapus:", kode => {
             let kd = kode;
             db.run(sql, [kd], (err, row) => {
                 if (err) throw err;
@@ -433,73 +432,109 @@ class subjectMenu extends menu {
         })
     }
 }
-class classMenu extends menu {
+
+
+
+class contractMenu extends menu {
     constructor(type) {
         super(type)
         this.type = type
     }
     list = () => {
-        let sql = `SELECT * FROM kelas`;
+        let sql = `SELECT * FROM kontrak`;
         db.all(sql, (err, row) => {
             if (err) throw err;
             if (row) {
                 let table = new Table({
-                    head: [`JADWAL`, `HARI`, 'RUANGAN', 'KODE MATA KULIAH']
+                    head: [`ID`, `NIM`, 'KODE MATA KULIAH', 'KODE PENGAJAR']
                 });
-                row.forEach((kelas) =>
+                row.forEach((kontrak) =>
                     table.push(
-                        [`${kelas.jadwal}`, `${kelas.hari}`, `${kelas.ruangan}`, `${kelas.kode_matkul}`]
+                        [`${kontrak.id}`, `${kontrak.nim}`, `${kontrak.kode_matkul}`, `${kontrak.kode_pengajar}`]
                     ))
                 console.log(table.toString());
             }
-            super.list('kelas')
+            super.list('kontrak')
         })
     }
     search = () => {
         console.log('=======================================================');
-        rl.question('Masukan Kode Mata Kuliah :', (kode) => {
-            let sql = `SELECT * FROM kelas WHERE kode_matkul =?`;
-            db.get(sql, [kode], (err, kelas) => {
+
+        rl.question('Masukan NIM mahasiswa :', (nim) => {
+            let sql = `SELECT * FROM kontrak WHERE nim =?`;
+            // db.all(sql, (err, row) => {
+            //     if (err) throw err;
+            //     if (row) {
+            //         let table = new Table({
+            //             head: [`ID`, `NIM`, 'KODE MATA KULIAH', 'KODE PENGAJAR']
+            //         })
+            //         row.forEach((kontrak) =>
+            //             {if (kontrak.nim == x)
+            //                 {table.push(
+            //                 [`${kontrak.id}`, `${kontrak.nim}`, `${kontrak.kode_matkul}`, `${kontrak.kode_pengajar}`])
+            //             }}
+            //              ) , console.log(table.toString())
+            //     } 
+            //     super.list('kontrak')
+            // })
+            db.get(sql, [nim], (err, kontrak) => {
                 if (err) throw err;
-                if (kelas) {
-                    console.log('KODE MATA KULIAH :', `${kelas.kode_matkul}`);
-                    console.log('HARI', `${kelas.hari}`);
-                    console.log('RUANGAN', `${kelas.ruangan}`);
-                    console.log('JADWAL', `${kelas.jadwal}`);
-                    super.search('kelas')
+                if (kontrak) {
+                    console.log('NIM :', `${kontrak.nim}`);
+                    console.log('Kode Mata Kuliah', `${kontrak.kode_matkul}`);
+                    console.log('Kode Pengajar', `${kontrak.kode_pengajar}`);
+
+                super.search('kontrak')
                 }
                 else {
-                    console.log('Kode Mata Kuliah tidak terdaftar!');
-                    super.search('kelas')
+                    console.log('NIM tidak terdaftar di kontrak!');
+                    super.search('kontrak')
                 }
             })
-            super.search('kelas')
+
         })
     }
     add = () => {
         console.log('Lengkapi data dibawah ini');
-        rl.question("Kode Mata Kuliah :", (kode) => {
-            rl.question("Nama Mata Kuliah :", (nama) => {
-                rl.question("SKS Mata Kuliah :", (sks) => {
-                    rl.question("Kode Pengajar :", (kodepengajar) => {
-                        let sql = 'INSERT INTO mata_kuliah (kode_matkul, nama, sks, kode_pengajar) VALUES (?,?,?,?)';
-                        let kd = kode;
-                        let nm = nama;
-                        let s = sks;
-                        let kp = kodepengajar;
-                        db.all(sql, [kd, nm, s, kp], (err) => {
-                            if (err) throw err;
-                            console.log('Sukses menambahkan mata kuliah');
-                            super.list('mata_kuliah')
+        rl.question("Nim :", (nim) => {
+
+            let sql = `SELECT * FROM mata_kuliah`;
+
+            db.all(sql, (err, row) => {
+                if (err) throw err;
+                if (row) {
+                    let table = new Table({
+                        head: [`KODE MATA KULIAH`, `NAMA MATA KULIAH`, 'SKS', 'KODE PENGAJAR']
+                    });
+                    row.forEach((mata_kuliah) =>
+                        table.push(
+                            [`${mata_kuliah.kode_matkul}`, `${mata_kuliah.nama}`, `${mata_kuliah.sks}`, `${mata_kuliah.kode_pengajar}`]
+                        ))
+                    console.log(table.toString());
+                    rl.question("Kode Mata Kuliah :", (kode_matkul) => {
+                        rl.question("Kode Pengajar :", (kode_pengajar) => {
+                            let sql = 'INSERT INTO kontrak (nim, kode_matkul, kode_pengajar) VALUES (?,?,?)';
+                            let kd = nim;
+                            let nm = kode_matkul;
+                            let s = kode_pengajar;
+                            db.all(sql, [kd, nm, s], (err) => {
+                                if (err) throw err;
+                                console.log('Sukses menambahkan kontrak kuliah');
+                                super.list('kontrak')
+                            })
                         })
                     })
-                })
+                }
             })
+
+
+            
+
         })
     }
     erase = () => {
-        let sql = `DELETE FROM mata_kuliah where kode_matkul=?`;
-        rl.question ("Masukkan kode mata kuliah yang akan dihapus:", kode =>{
+        let sql = `DELETE FROM mata_kuliah where id=?`;
+        rl.question("Masukkan kode mata kuliah yang akan dihapus:", kode => {
             let kd = kode;
             db.run(sql, [kd], (err, row) => {
                 if (err) throw err;

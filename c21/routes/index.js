@@ -45,12 +45,12 @@ module.exports = (pool) => {
       sql += ` where ${joindata} `
     }
     pool.query(sql, [], (err, count) => {
-      let rows = count.rows[0].total / 
+      let rows = count.rows[0].total 
       console.log(count[0]);
 
-      let page = req.query.page || 1; //  
-      let limit = 2; //   
-      let totalPage = Math.ceil(rows / limit)  
+      let page = req.query.page || 1;  
+      let limit = 2;  
+      let totalPage = Math.ceil(rows / limit) 
       let pages = (page - 1) * limit
       let queries = req.url === '/' ? '/?page=1' : req.url;
       let Query = req.query;
@@ -80,7 +80,6 @@ module.exports = (pool) => {
         res.redirect('/');
       })
     });
-
  
     router.get('/edit/:ID', (req, res) => {
       let edit = req.params.ID;

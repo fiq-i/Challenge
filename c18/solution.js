@@ -1,13 +1,19 @@
-// import {studentMenu, subjectMenu, classMenu, lecturerMenu, majorMenu} from './functional.js'
-// const readline = require('readline');
-import readline from 'readline'
+// import menu from './functional.js'
+// import {studentMenu, majorMenu, lecturerMenu, subjectMenu, classMenu} from './functional.js'
+const studentMenu = require ('./functional.js')
+const menu = require ('./functional.js')
+const majorMenu = require ('./functional.js')
+const lecturerMenu = require ('./functional.js')
+const subjectMenu = require ('./functional.js')
+const classMenu = require ('./functional.js')
+const readline = require('readline');
+// import readline from 'readline'
 const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('universitas.db', err => {
     if (err) {
         return console.log('database error');
     }
 });
-// const Table = require('cli-table');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -101,4 +107,20 @@ mainMenu = () => {
 
 
 login()
-// logout()
+module.exports = {readline, rl, sqlite3, db}
+exports.question = function(q , cb ){
+
+    var response;
+
+    rl.setPrompt(q);
+    rl.prompt();
+
+    rl.on('line', (userInput) => {
+        response = userInput;
+        rl.close();
+    });
+
+    rl.on('close', () => {
+        return cb(response);
+    });
+};

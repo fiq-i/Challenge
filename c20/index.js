@@ -101,31 +101,31 @@ app.post('/edit/:ID', (req, res) => {
 
 
 app.get('/', (req, res) => {    
-  let { x1, x2, x3, x4, x5, x6, xID, xname, xweight, xheight, xdatestart, xdateend,
+  let {xID, xname, xweight, xheight, xdatestart, xdateend,
        xstatus } = req.query;
   let filter = []
   let flag = false
-  if (x1 && xID) {
+  if (xID) {
       filter.push(`ID = ${xID}`)
       flag = true
   }
-  if (x2 && xname) {
+  if (xname) {
       filter.push(`name = '${xname}'`)
       flag = true
   }
-  if (x3 && xweight) {
+  if (xweight) {
     filter.push(`weight = ${xweight}`)
       flag = true
   }
-  if (x4 && xheight) {
+  if (xheight) {
     filter.push(`height = ${xheight}`)
       flag = true
   }
-  if (x5 && xdatestart && xdateend) {
+  if (xdatestart && xdateend) {
     filter.push(`birthdate BETWEEN '${xdatestart}' and '${xdateend}'`)
       flag = true
   }
-  if (x6 && xstatus) {
+  if (xstatus) {
     filter.push(`status = '${xstatus}'`)
       flag = true
   }

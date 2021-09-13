@@ -35,7 +35,7 @@ export default class MesinHitung {
          return this
     }
 
-    square(x){
+    square(){
          this.x = Math.pow(this.x, 2)
          return this
     }

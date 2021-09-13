@@ -1,16 +1,23 @@
+// import {type} from './solution.js'
 const readline = require('readline');
-import readline from 'readline';
+// const readline = require('./solution');
+
+// const sqlite3 =require('./solution.js')
+
 const sqlite3 = require('sqlite3').verbose();
+// const db =require('./solution.js')
 let db = new sqlite3.Database('universitas.db', err => {
     if (err) {
         return console.log('database error');
     }
 });
 const Table = require('cli-table');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
+
+const rl = require('./solution.js')
 class menu {
     constructor(type) {
         this.type = type;
@@ -32,7 +39,6 @@ class menu {
             switch (option) {
                 case "1":
                     this.list();
-                    // this.menu(type);
                     break;
                 case "2":
                     this.search();
@@ -425,7 +431,7 @@ class classMenu extends menu {
     }
 }
 
+// export {studentMenu, majorMenu, lecturerMenu, subjectMenu, classMenu}
+module.exports = menu, studentMenu, majorMenu, lecturerMenu, subjectMenu, classMenu
 
 
-
-export {studentMenu, subjectMenu, classMenu, lecturerMenu, majorMenu}

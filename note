@@ -5,3 +5,28 @@ npm install
 pake babel-cli
 npm install babel-preset-es2015
 install babel node
+
+npm install babel-preset-es2015
+npm install babel-cli --save
+
+sudo npm install -g babel-cli
+npm install express -S
+Pelajari req.querry
+req.body
+req.param
+limit offset
+
+http.createserver (function(req,res){
+    res.writeHead(200, {'Content-Type' : 'text/html})
+
+})
+
+
+db.bread.insertMany([{"string": "Aaaa", "integer": 2, "float": 15.95, 
+                    "date": ISODate("2016-03-03"), "boolean": true},
+                    {"string": "Bbb", "integer": 3, "float": 11.95, 
+                    "date": ISODate("2015-03-03"), "boolean": false},
+                    {"string": "Cc", "integer": 4, "float": 152.95, 
+                    "date": ISODate("2014-03-03"), "boolean": false},
+                    {"string": "D", "integer": 5, "float": 151.95, 
+                    "date": ISODate("2013-03-03"), "boolean": false}])

@@ -2,16 +2,17 @@
 <html lang="en">
 
 <head>
-
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>MY APP</title>
 </head>
 
 <body>
+    <h1>BREAD Postgres</h1>
     <h2>Filters</h2>
     <form action="/" method="GET">
-
         <input type="hidden" value="x1" name="x1" <%=test.ID=='on' %> /> ID
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="number" class="form-control" id="xID" name="xID" placeholder="ID" min="0" />
