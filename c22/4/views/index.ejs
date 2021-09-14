@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD AJAX</title>
+    <style type="text/css">
+        body {
+            background-color: lightblue;
+        }
+    </style>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    
+    </script>
+ 
+
+<br />
+<br />
+<!-- <form class="" action="/search" method="get" id="formx">
+
+    <div class="form-group">
+      <label for="string">String</label>
+      <input type="text" class="form-control" name="string" id="string" placeholder="String">
+    </div>
+
+    <div class="form-group">
+      <label for="integer">Integer</label>
+      <input type="text" class="form-control" name="integer" id="float" placeholder="Integer">
+    </div>
+
+    <div class="form-group">
+      <label for="float">Float</label>
+      <input type="text" class="form-control" name="float" id="float" placeholder="Float">
+    </div>
+
+    <div class="form-group">
+      <label for="sdate">Date</label>
+      <input type="text" class="form-control" name="sdate" id="sdate" placeholder="dd/mm/yyyy">
+    </div>
+
+    <div class="form-group">
+      <label for="edate">to</label>
+      <input type="text" class="form-control" name="edate" id="edate" placeholder="dd/mm/yyyy">
+    </div>
+
+    <div class="form-group">
+      <label for="boolean">Boolean</label>
+      <select class="form-control" name="boolean" id="boolean">
+        <option></option>
+        <option>true</option>
+        <option>false</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+    
+  </form>  -->
+  
+<form id="form1" method="POST" form class="" action="/search" >
+    <table class="table table-striped">
+        <div class="form-group">
+        <tr>
+            <td><label>String</label></td>
+            <td><input class="form-control" type="text" name="string" id="string" required></td>
+        </tr>
+    </div>
+        <tr>
+            <td><label>Integer</label></td>
+            <td><input class="form-control" type="Number" name="integer" id="integer" required></td>
+        </tr>
+        <tr>
+            <td><label>Float</label></td>
+            <td><input class="form-control" type="text" name="float" id="float" required></td>
+        </tr>
+        <tr>
+            <td><label>Date</label></td>
+            <td><input class="form-control" type="date" name="date" id="date" required></td>
+        </tr>
+        <tr>
+            <td><label>Boolean</label></td>
+                <td><select class="form-control" name="boolean" id="boolean">
+                <option></option>
+                <option>true</option>
+                <option>false</option>
+              </select></td>
+                
+        </tr>
+    </table>
+    <br />
+    <button type="Submit" id="add" class="btn btn-success">Add</button>
+</form>
+<br />
+
+<table class="table table-striped" table id='myTable'>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>String</th>
+        <th>Integer</th>
+        <th>FLoat</th>
+        <th>Date</th>
+        <th>Boolean</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      </tbody>
+
+    </table>
+</head>
+
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#form1").submit(function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: $('#form1').serialize(),
+                    dataType: "json",
+                    success: function (response) {
+                        
+                        Show();
+                        clearInputs();
+                        //$( "#a" ).click();
+                    },
+                    error: function () {
+                    }
+                })
+            });
+
+            $('table').on('click', '.update-button', function () {
+                let rowEl = $(this).closest('tr');
+                let id = rowEl.find('.id').text();
+                let string = rowEl.find('.string').val();
+                let integer = rowEl.find('.integer').val();
+                let float = rowEl.find('.float').val();
+                let date = rowEl.find('.date').val();
+                let boolean = rowEl.find('.boolean').val();
+
+                $.ajax({
+                    url: '/user/' + id,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ string: string, integer: integer, float: float, date:date, boolean: boolean }),
+                    success: function (response) {
+                        console.log(response);
+                        $("#a").click();
+                    }
+                });
+
+            });
+            $('table').on('click', '.delete-button', function () {
+                let rowEl = $(this).closest('tr');
+                let id = rowEl.find('.id').text();
+
+                $.ajax({
+                    url: '/user/' + id,
+                    method: 'DELETE',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log("response" + response);
+                        Show().click();
+                    }
+                });
+            });
+
+            window.onload = Show();
+
+            // $("#a").onLoad(function () {
+            //     Show();
+            // });
+            function Show() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/show',
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        // let tbodyEl = $('tbody');
+                        let tbodyEl = $("#myTable > tbody")
+
+                        tbodyEl.html('');
+
+                        response.forEach(function (product) {
+                            tbodyEl.append('\
+                        <tr>\
+                        <td class="id">' + product.unique_id + '</td>\
+                        <td><input type="text" class="string form-control" value="' + product.string + '"></td>\
+                        <td><input type="Number" class="integer form-control" value="' + product.integer + '"></td>\
+                        <td><input type="Number" class="float form-control" value="' + product.float + '"></td>\
+                        <td><input type="text" class="date form-control" value="' +  product.date + '"></td>\
+                        <td><input type="boolean" class="boolean form-control" value="' + product.boolean + '"></td>\
+                        <td>\
+                        <button class="update-button btn btn-secondary href="../edit/product.unique_id ">UPDATE</button>\
+                        <button class="delete-button btn btn-danger href="../delete/ product.unique_id ">DELETE</button>\
+                        </td>\
+                        </tr>\
+                        ');
+                        });
+                    },
+                    error: function () {
+                    }
+                })
+            }
+
+            function Show() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/show',
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        // let tbodyEl = $('tbody');
+                        let tbodyEl = $("#myTable > tbody")
+
+                        tbodyEl.html('');
+
+                        response.forEach(function (product) {
+                            tbodyEl.append('\
+                        <tr>\
+                        <td class="id">' + product.unique_id + '</td>\
+                        <td><input type="text" class="string form-control" value="' + product.string + '"></td>\
+                        <td><input type="Number" class="integer form-control" value="' + product.integer + '"></td>\
+                        <td><input type="Number" class="float form-control" value="' + product.float + '"></td>\
+                        <td><input type="text" class="date form-control" value="' +  product.date + '"></td>\
+                        <td><input type="boolean" class="boolean form-control" value="' + product.boolean + '"></td>\
+                        <td>\
+                        <button class="update-button btn btn-secondary href="../edit/product.unique_id ">UPDATE</button>\
+                        <button class="delete-button btn btn-danger href="../delete/ product.unique_id ">DELETE</button>\
+                        </td>\
+                        </tr>\
+                        ');
+                        });
+                    },
+                    error: function () {
+                    }
+                })
+            }
+
+            function clearInputs() {
+                $("#string").val('');
+                $("#integer").val('');
+                $("#float").val('');
+                $("#date").val('');
+                $("#boolean").val('');
+            }
+        });
+    </script>    
+          
+</body>
+
+</html>

@@ -27,6 +27,79 @@
   </script>
 </head>
 <body>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#form1").submit(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: $('#form1').serialize(),
+                dataType: "json",
+                success: function (response) {
+                    clearInputs();
+                    Show();
+                    //$( "#a" ).click();
+                },
+                error: function () {
+                }
+            })
+        });
+
+        // $('table').on('click', '.update-button', function () {
+        //     let rowEl = $(this).closest('tr');
+        //     let id = rowEl.find('.id').text();
+        //     let string = rowEl.find('.string').val();
+        //     let integer = rowEl.find('.integer').val();
+        //     let float = rowEl.find('.float').val();
+        //     let date = rowEl.find('.date').val();
+        //     let boolean = rowEl.find('.boolean').val();
+
+        //     $.ajax({
+        //         url: '/user/' + id,
+        //         method: 'PUT',
+        //         contentType: 'application/json',
+        //         data: JSON.stringify({ string: string, integer: integer, float: float, date:date, boolean: boolean }),
+        //         success: function (response) {
+        //             console.log(response);
+        //             $("#a").click();
+        //         }
+        //     });
+
+        // });
+        $('table').on('click', '.delete-button', function () {
+            let rowEl = $(this).closest('tr');
+            let id = rowEl.find('._id').text();
+
+            $.ajax({
+                url: '/user/' + id,
+                method: 'DELETE',
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log("response" + response);
+                    window.onload().click();
+                }
+            });
+        });
+
+        // window.onload = Show();
+
+        // $("#a").onLoad(function () {
+        //     Show();
+        // });
+       
+
+        function clearInputs() {
+            $("#string").val('');
+            $("#integer").val('');
+            $("#float").val('');
+            $("#date").val('');
+            $("#boolean").val('');
+        }
+    });
+</script>    
 
   <h1>BREAD(Browse, Read, Edit, Add, Delete)</h1>
   <h2>Filters</h2>
@@ -97,7 +170,7 @@
           <td><%= data[i].boolean %></td>
           <td>
             <a href="../edit/<%= data[i]._id %>" class="btn btn-success">Edit</a>
-            <a href="../delete/<%= data[i]._id %>" class="btn btn-danger">Delete</a>
+            <button class="delete-button btn btn-danger" href="../delete/ <% data[i]._id %> ">DELETE</button>
           </td>
         </tr>
         <% } %>

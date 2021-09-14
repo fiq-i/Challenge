@@ -27,32 +27,32 @@ module.exports = function (take) {
 
     if (params.length > 0) {
       if (string) {
-        var ObjectName = { string: string };
+        var ObjectString = { string: string };
       }
       if (integer) {
-        var ObjectWeight = { integer: `${integer}` };
+        var ObjectInteger = { integer: `${integer}` };
       }
       if (float) {
-        var ObjectHeight = { float: `${float}` };
+        var ObjectFloat = { float: `${float}` };
       }
       if (boolean) {
-        var ObjectStatus = { boolean: boolean };
+        var ObjectBoolean = { boolean: boolean };
       }
 
       var find = {
-        ...ObjectName,
-        ...ObjectWeight,
-        ...ObjectHeight,
-        ...ObjectStatus,
+        ...ObjectString,
+        ...ObjectInteger,
+        ...ObjectFloat,
+        ...ObjectBoolean,
       };
 
       if (start && end) {
         var ObjectDate = { date: { $gte: start, $lte: end } };
         var find = {
-          ...ObjectName,
-          ...ObjectWeight,
-          ...ObjectHeight,
-          ...ObjectStatus,
+          ...ObjectString,
+          ...ObjectInteger,
+          ...ObjectFloat,
+          ...ObjectBoolean,
           ...ObjectDate,
         };
       }
