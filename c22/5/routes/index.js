@@ -108,7 +108,7 @@ module.exports = function (take) {
         string: req.body.string,
         integer: req.body.integer,
         float: req.body.float,
-        tanggal: req.body.date,
+        date: req.body.date,
         boolean: req.body.boolean,
       },
       (err, result) => {
