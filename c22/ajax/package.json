@@ -1,35 +1,19 @@
 {
-  "name": "Node-Express-MongoDB-REST-API-jQuery-AJAX",
-  "version": "0.0.1",
+  "name": "mongobread",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "cookie-parser": "^1.4.3",
-    "debug": "^4.1.1",
-    "ejs": "^3.0.1",
-    "express": "^4.15.5",
-    "mongoose": "^5.9.5",
-    "morgan": "^1.8.2",
-    "serve-favicon": "^2.4.5"
-  },
-  "description": "Example based on Node.js, Express.js, MongoDB, Mongoose, EJS and jQuery AJAX REST API.",
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FSojitra/Node-Express-MongoDB-REST-API-jQuery-AJAX.git"
-  },
-  "keywords": [
-    "ajax",
-    "rest",
-    "api"
-  ],
-  "author": "foram sojitra",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FSojitra/Node-Express-MongoDB-REST-API-jQuery-AJAX/issues"
-  },
-  "homepage": "https://github.com/FSojitra/Node-Express-MongoDB-REST-API-jQuery-AJAX#readme"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "^2.5.9",
+    "express": "^4.16.4",
+    "express-generator": "^4.16.1",
+    "http-errors": "~1.6.2",
+    "mongoose": "^5.13.5",
+    "morgan": "~1.9.0"
+  }
 }
