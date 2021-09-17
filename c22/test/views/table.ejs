@@ -1,0 +1,74 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+   
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Berat</th>
+            <th>Tinggi</th>
+            <th>Tanggal Lahir</th>
+            <th>Status Pernikahan</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i < superhero.length; i++){ %>
+          <tr>
+            <td><%= i +1 %></td>
+            <td><%= superhero[i].nama %></td>
+            <td><%= superhero[i].berat %></td>
+            <td><%= superhero[i].tinggi %></td>
+            <td><%= superhero[i].tl %></td>
+            <td><%= superhero[i].marital %></td>
+            <td class="text-center">
+              <form
+                action="/superhero/<%= superhero[i].id %>?_method=DELETE"
+                method="POST"
+              >
+                <a
+                  href="javascript:void()"
+                  class="btn btn-warning button-update"
+                  data-id="<%= superhero[i].id %>"
+                  data-nama="<%= superhero[i].nama %>"
+                  data-berat="<%= superhero[i].berat %>"
+                  data-tinggi="<%= superhero[i].tinggi %>"
+                  data-tl="<%= superhero[i].tl %>"
+                  data-marital="<%= superhero[i].marital %>"
+                  >Edit</a
+                >
+                <button
+                  type="submit"
+                  class="btn btn-danger"
+                  onclick="return confirm('Delete?');"
+                >
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+   <!-- Button trigger modal -->
+   <button
+   type="button"
+   class="btn btn-primary"
+   data-toggle="modal"
+   data-target="#add-modal"
+ >
+   Add
+ </button>
+</div>
+</div>

@@ -1,31 +1,99 @@
-<%- include('partials/header') %>
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
   <body>
-    <div class="container-fluid">
-      <form action="">
-        <div class ="mb-3">
-          <label for="integer" class="form-label">Integer</label>
-          <input type ="text" class="form-control" id="name">
-        </div>
-        <button class="btn btn-primary" type="submit">
-          SIMPAN
-        </button>
-      </form>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>String</th>
-            <th>Integer</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Bambang</td>
-            <td>17</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>
+    <div class="container mt-5">
+      <h2 class="text-center">CRUD AJAX</h2>
+      <h2>Filters</h2>
 
-  <%- include('partials/footer') %>
+      <form class="" action="/search" method="get" id="formx">
+        <div class="form-group">
+          <label for="string">Nama</label>
+          <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama">
+        </div>
+    
+        <div class="form-group">
+          <label for="integer">Berat</label>
+          <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat">
+        </div>
+    
+        <div class="form-group">
+          <label for="float">Tinggi</label>
+          <input type="text" class="form-control" name="tinggi" id="tinggi" placeholder="Tinggi">
+        </div>
+    
+        <div class="form-group">
+          <label for="sdate">Tanggal Lahir</label>
+          <input type="text" class="form-control" name="sdate" id="sdate" placeholder="dd/mm/yyyy">
+        </div>
+    
+        <div class="form-group">
+          <label for="edate">to</label>
+          <input type="text" class="form-control" name="edate" id="edate" placeholder="dd/mm/yyyy">
+        </div>
+    
+        <div class="form-group">
+          <label for="boolean">Status Pernikahan</label>
+          <select class="form-control" name="marital" id="marital">
+            <option></option>
+            <option>true</option>
+            <option>false</option>
+          </select>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Search</button>
+        
+      </form> 
+      <div class="row mt-3">
+        <!-- Alert -->
+        <div class="col-auto col-lg-12 mt-2">
+          <% if(alert.message != "") { %>
+          <div class="alert alert-<%= alert.status %>" role="alert">
+            <%= alert.message %>
+          </div>
+          <% } %>
+        </div>
+        <!-- Table -->
+        <div class="col-auto col-lg-12 mt-2"><%- include('table.ejs') %></div>
+      </div>
+    </div>
+    <!-- Add Modal -->
+    <%- include('add_modal.ejs') %>
+    <!-- Add Modal -->
+    <%- include('edit_modal.ejs') %>
+    <!-- JS -->
+    <%- include('js.ejs') %>
+
+    <script>
+      /* Menampilkan modal dan memanggil tag table yang memiliki id dataTable
+         class button-update di class tag a Edit di file table.ejs */
+      $("#dataTable").on("click", ".button-update", function () {
+        // membuat variabel untuk mengambil data-id, data-name, dstnya yang sudah dibuat di file table.ejs di bagian tag a edit
+        let id = $(this).data("id");
+        let nama = $(this).data("nama");
+        let berat = $(this).data("berat");
+        let tinggi = $(this).data("tinggi");
+        let tl = $(this).data("tl");
+        let marital = $(this).data("marital");
+      
+        $("#edit-modal").modal("show");
+        
+        $(".id").val(id);
+        $(".nama").val(nama);
+        $(".berat").val(berat);
+        $(".tinggi").val(tinggi);
+        $(".tl").val(tl);
+        $(".marital").val(marital);
+      });
+    </script>
+    
+  </body>
+</html>
