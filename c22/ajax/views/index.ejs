@@ -1,14 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html >
 
 <head>
     <title>CRUD AJAX</title>
-    <style type="text/css">
-        body {
-            background-color: lightblue;
-        }
-    </style>
-    <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
@@ -16,51 +10,15 @@
     
     </script>
  
-
-<br />
-<br />
-<!-- <form class="" action="/search" method="get" id="formx">
-
-    <div class="form-group">
-      <label for="string">String</label>
-      <input type="text" class="form-control" name="string" id="string" placeholder="String">
-    </div>
-
-    <div class="form-group">
-      <label for="integer">Integer</label>
-      <input type="text" class="form-control" name="integer" id="float" placeholder="Integer">
-    </div>
-
-    <div class="form-group">
-      <label for="float">Float</label>
-      <input type="text" class="form-control" name="float" id="float" placeholder="Float">
-    </div>
-
-    <div class="form-group">
-      <label for="sdate">Date</label>
-      <input type="text" class="form-control" name="sdate" id="sdate" placeholder="dd/mm/yyyy">
-    </div>
-
-    <div class="form-group">
-      <label for="edate">to</label>
-      <input type="text" class="form-control" name="edate" id="edate" placeholder="dd/mm/yyyy">
-    </div>
-
-    <div class="form-group">
-      <label for="boolean">Boolean</label>
-      <select class="form-control" name="boolean" id="boolean">
-        <option></option>
-        <option>true</option>
-        <option>false</option>
-      </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Search</button>
-    
-  </form>  -->
   
 <form id="form1" method="POST" form class="" action="/search" >
     <table class="table table-striped">
+        <div class="form-group">
+            <tr>
+                <td><label>ID</label></td>
+                <td><input class="form-control" type="text" name="id" id="id" required></td>
+            </tr>
+        </div>
         <div class="form-group">
         <tr>
             <td><label>String</label></td>
@@ -100,13 +58,12 @@
         <th>ID</th>
         <th>String</th>
         <th>Integer</th>
-        <th>FLoat</th>
+        <th>Float</th>
         <th>Date</th>
         <th>Boolean</th>
         <th>Action</th>
       </tr>
     </thead>
-
     <tbody>
       </tbody>
 
@@ -195,12 +152,12 @@
                         <td class="id">' + product.unique_id + '</td>\
                         <td><input type="text" class="string form-control" value="' + product.string + '"></td>\
                         <td><input type="Number" class="integer form-control" value="' + product.integer + '"></td>\
-                        <td><input type="Number" class="float form-control" value="' + product.float + '"></td>\
+                        <td><input type="text" class="float form-control" value="' + product.float + '"></td>\
                         <td><input type="text" class="date form-control" value="' +  product.date + '"></td>\
                         <td><input type="boolean" class="boolean form-control" value="' + product.boolean + '"></td>\
                         <td>\
-                        <button class="update-button btn btn-secondary href="../edit/product.unique_id ">UPDATE</button>\
-                        <button class="delete-button btn btn-danger href="../delete/ product.unique_id ">DELETE</button>\
+                        <button class="update-button btn btn-secondary href="../edit/product.unique_id ">Edit</button>\
+                        <button class="delete-button btn btn-danger href="../delete/ product.unique_id ">Delete</button>\
                         </td>\
                         </tr>\
                         ');

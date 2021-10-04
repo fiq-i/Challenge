@@ -3,18 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const flash = require('connect-flash');
+const session = require('express-session');
+const { Pool } = require('pg');
 
-const { Pool } = require('pg')
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'PMS',
-  password: 'aldi',
-  port: 5432,
-})
+  password: '1234',
+  port: 5432
+});
 
-var indexRouter = require('./routes/index')(pool);
+var loginRouter = require('./routes/login')(pool);
 var usersRouter = require('./routes/users');
+var projectRouter = require('./routes/project')(pool);
+var profileRouter = require('./routes/profile')(pool);
+
 
 var app = express();
 
@@ -27,9 +32,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'fiq-i'
+}));
+app.use(flash());
 
-app.use('/', indexRouter);
+app.use('/', loginRouter);
 app.use('/users', usersRouter);
+app.use('/project', projectRouter);
+app.use('/profile', profileRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

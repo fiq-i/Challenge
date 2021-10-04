@@ -33,7 +33,7 @@ function showTable(myQuery, res, req){
   var cpage = req.query.c || 1;
   findData(5, skip, myQuery, function(result, count){
     var page = Math.ceil(count/5);
-    res.render('index', { data: result, page: page, cpage: cpage, util: util });
+    res.render('index.ejs', { data: result, page: page, cpage: cpage, util: util });
   });
 }
 // /* GET home page. */

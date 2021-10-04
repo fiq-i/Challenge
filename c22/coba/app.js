@@ -31,8 +31,9 @@ var usersRouter = require('./routes/users')(db);
 var app = express();
 
 // view engine setup
+app.engine('html', require('ejs').renderFile);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');   
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -56,8 +57,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
-});
+  res.render('error.ejs');
+});  
 
 var debug = require('debug')('coba:server');
 var http = require('http');

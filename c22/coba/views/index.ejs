@@ -12,14 +12,14 @@
   <title>AJAX</title>
 </head>
 
-<body onload="loadData()">
+<body onload="loadData()"  id="a">
   <div class="container-fluid">
-    <div class="card">
+    <div class="card" id="card">
       <div class="card-header text-center">
         <h1>AJAX BREAD</h1>
       </div>
       <div class="card-body">
-        <form action="" id="formx" onsubmit="return saveData()">
+        <form action="" id="formx" onsubmit="return saveData()"> <h2> ADD DATA </h2>
           <div class="mb-3">
             <label for="string">String</label>
             <input type="text" class="form-control" id="string" required>
@@ -55,25 +55,7 @@
         </tbody>
       </table>
       <div class="card-footer">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        
       </div>
     </div>
   </div>
@@ -88,6 +70,7 @@
       addData(string, integer, float, date, boolean)
       return false
     }
+    
     const loadData = () => {
       fetch('http://localhost:3000/users')
         .then(response => response.json()
@@ -111,6 +94,7 @@
           })
         )
     }
+
     const addData = (string, integer, float, date, boolean) => {
       fetch('http://localhost:3000/users', {
         method: 'POST', // or 'PUT'
@@ -128,6 +112,7 @@
           alert('Error:' + error);
         });
     }
+
     const deleteData = id => {
       console.log(id)
       fetch(`http://localhost:3000/users/${id}`, {
@@ -146,43 +131,67 @@
     }
 
     const editData1 = id => {
-      fetch(`http://localhost:3000/users/${id}`, {
+      fetch(`http://localhost:3000/users/edit/${id}`, {
         method: 'PUT', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ string, integer, float, date, boolean }),
         })
+        .then(response => response.json())
         .then(data => {
-          loadData();
+          
         })
         .catch((error) => {
           alert('Error:' + error);
         });
     }
 
+
     const editData = (id) => {
+      let htmla = ``
+              htmla += 
+      `
+<body onload="loadData()"  id="b">
+      <div class="card-body">
+        <form action="" id="formx" > 
+          
+        </form>
+      </div>
+</body>`
+
+document.getElementById('a').innerHTML = htmla;
       let array = id.split(" ");
-      fetch(`http://localhost:3000/users/`)
+
+      fetch(`http://localhost:3000/users/${id}`)
           .then(data => {
             let html = ``
               html += `
-                <td><input type="text" class="string form-control" id="string" value="${array[1]}"></td>\
-                <td><input type="Number" class="integer form-control" id ="integer" value=${array[2]}></td>\
-                <td><input type="text" class="float form-control" id="float" value= ${array[3]}></td>\
-                <td>\<input type="date" class="form-control" name="date" id="date" value= ${array[4]}> </td>\
-                <td>
-                <select class="form-control" name="boolean" id="boolean" required>
-                <option>${array[5]}</option>
-                <option>true</option>
-                <option>false</option>
-                <td>
-                  <button class="btn btn-success" type="button" onclick="
-              editData1('${array[0]}')">
-              Update</button>
-                </td>
+                <div class="card-body">
+        <form action="" onsubmit="return editData1('${array[0]}')"> <h2> EDIT DATA </h2>
+          <div class="mb-3">
+            <label for="string">String</label>
+            <input type="text" class="form-control" name="id" value="${array[0]}" hidden>
+            <label for="string">String</label>
+            <input type="text" class="form-control" name="string" id="string" value="${array[1]}" required>
+            <label for="integer">Integer</label>
+            <input type="text" class="form-control" name="integer" id="integer" value=${array[2]} required>
+            <label for="float">Float</label>
+            <input type="text" class="form-control" name="float" id="float" value=${array[3]} required>
+            <label for="date">Date</label>
+            <input type="date" class="form-control" name="date" id="date" value=${array[4]} required>
+            <label for="boolean">Boolean</label>
+            <select class="form-control" name="boolean" id="boolean" required>
+              <option {array[5]} ? " selected" : ""; >true</option>
+              <option !{array[5]} ? " selected" : ""; >false</option>
+            </select>
+          </div>
+          <button class="btn btn-success" type="submit">Update</button>
+        </form>
+      </div>
             `
-            document.getElementById('tbodyx').innerHTML = html;
+            document.getElementById('formx').innerHTML = html;
+            
           })
     }
   </script>
